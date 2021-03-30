@@ -9,7 +9,7 @@ package com.softinix.generation.ujama.main;
  *
  * @author JonathanSoftinix
  */
-public class UjamaFriendsRwanda {
+public class Main {
 
     /**
      * @param args the command line arguments
