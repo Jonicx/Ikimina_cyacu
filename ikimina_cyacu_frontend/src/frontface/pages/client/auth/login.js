@@ -25,7 +25,7 @@ export const LoginView = () => {
 										</h4>
 
 										<p className='text-capitalize text-bold'>
-											Welcome Back Admin, Happy Registration
+											Welcome Back Admin, Happy Registering
 										</p>
 									</Col>
 								</Row>
