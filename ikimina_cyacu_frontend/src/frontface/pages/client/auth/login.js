@@ -67,7 +67,7 @@ export const LoginView = () => {
 									style={{ fontSize: '12px' }}
 								>
 									<>
-										<i className='fa fa-lock mr-1'></i> Sign In
+									 Sign In
 									</>
 								</Button>
 							</Form>
