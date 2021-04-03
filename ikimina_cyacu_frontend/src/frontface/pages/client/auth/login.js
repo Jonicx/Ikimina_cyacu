@@ -11,21 +11,18 @@ import LoginImage from '../../../../assets/login.png';
 
 export const LoginView = () => {
 	return (
-			<section className='auth-form py-5'>
+			<section className='auth-form py-5 mt-5'>
 				<Container>
 					<Row>
 						<Col lg={5}>
 							<Form
-								className='p-5 shadow mt-5 border'
+								className='p-5 mt-5 '
 							>
 								<Row>
-									<Col lg={12}>
-										<h4 className='text-bold' style={{ color: '#000' }}>
-											Login
-										</h4>
-
-										<p className='text-capitalize text-bold'>
-											Welcome Back Admin, Happy Registering
+									<Col lg={12} sm={6} xs={6} md={6}>
+										<p className='Sub_Title text-capitalize text-bold text-center'>
+											<span className="title">IKIMINA</span>
+											CYACU
 										</p>
 									</Col>
 								</Row>
@@ -35,14 +32,8 @@ export const LoginView = () => {
 										type='text'
 										name='username'
 										placeholder='User Name'
-										required={true}
 										autoFocus={true}
-										autoComplete={false}
 									/>
-
-									<Form.Control.Feedback type='invalid'>
-										Email address is required
-									</Form.Control.Feedback>
 								</Form.Group>
 
 								<Form.Group>
@@ -50,14 +41,7 @@ export const LoginView = () => {
 										type='password'
 										name='password'
 										placeholder='Password'
-										required={true}
-										autoComplete={false}
 									/>
-
-									<Form.Control.Feedback type='invalid'>
-										Password is required
-									</Form.Control.Feedback>
-
 								</Form.Group>
 
 								<Button
@@ -72,9 +56,8 @@ export const LoginView = () => {
 								</Button>
 							</Form>
 						</Col>
-
 						<Col lg={7}>
-							<Image src={LoginImage} alt='Login' className='img-fluid' />
+							{<Image src={LoginImage} alt='Login' className='img-fluid' />}
 						</Col>
 					</Row>
 				</Container>

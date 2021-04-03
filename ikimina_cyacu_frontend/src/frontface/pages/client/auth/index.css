@@ -1,4 +1,15 @@
 .auth-form form a {
-   color: blue;
-   font-size: 14px;
+  color: blue;
+  font-size: 14px;
+}
+.title {
+  font-size: 45px;
+  color: rgb(40, 40, 40);
+  font-weight: 800;
+  font-family: Tahoma;
+}
+.Sub_Title {
+  font-size: 50px;
+  color: rgb(40, 40, 40);
+  font-weight: 50;
 }
