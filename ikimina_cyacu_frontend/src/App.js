@@ -1,12 +1,16 @@
-import logo from './logo.svg';
-import {LoginView} from './frontface/pages/client/auth/login'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {HomeView} from './frontface/pages/client/Register/main'
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <LoginView/>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <div className="App">
+       <HomeView></HomeView>
+      </div>
+    );
+  }
 }
 
-export default App;
+
+

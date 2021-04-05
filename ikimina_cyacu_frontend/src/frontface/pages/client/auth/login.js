@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 import './index.css';
 import LoginImage from '../../../../assets/login.png';
+import {HomeView} from '../Register/main';
 
 export const LoginView = () => {
 	return (
@@ -16,11 +17,11 @@ export const LoginView = () => {
 					<Row>
 						<Col lg={5}>
 							<Form
-								className='p-5 mt-5 '
+								className='p-5 mt-5'
 							>
 								<Row>
 									<Col lg={12} sm={6} xs={6} md={6}>
-										<p className='Sub_Title text-capitalize text-bold text-center'>
+										<p className='Sub_Title text-capitalize  text-center'>
 											<span className="title">IKIMINA</span>
 											CYACU
 										</p>
@@ -44,8 +45,9 @@ export const LoginView = () => {
 									/>
 								</Form.Group>
 
+								<a href={HomeView}>
 								<Button
-									type='submit'
+									// type='submit'
 									variant='primary'
 									className='btn-block mt-4 py-3'
 									style={{ fontSize: '12px' }}
@@ -54,6 +56,7 @@ export const LoginView = () => {
 									 Sign In
 									</>
 								</Button>
+								</a>
 							</Form>
 						</Col>
 						<Col lg={7}>
