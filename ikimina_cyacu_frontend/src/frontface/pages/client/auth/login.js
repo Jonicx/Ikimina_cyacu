@@ -3,40 +3,41 @@ import {
 	Form,
 	Row,
 	Col,
-	Button,
-	Image,
+	Button
 } from 'react-bootstrap';
 import './index.css';
-import LoginImage from '../../../../assets/login.png';
-import {HomeView} from '../Register/main';
+
 
 export const LoginView = () => {
 	return (
-			<section className='auth-form py-5 mt-5'>
+		<>
+			<section className='Login-slide' >
 				<Container>
 					<Row>
-						<Col lg={5}>
-							<Form
-								className='p-5 mt-5'
-							>
-								<Row>
-									<Col lg={12} sm={6} xs={6} md={6}>
-										<p className='Sub_Title text-capitalize  text-center'>
-											<span className="title">IKIMINA</span>
-											CYACU
-										</p>
-									</Col>
-								</Row>
+						<Col lg={5} md={12} sm={12} xs={12} className="Form_Side mt-4">
+							<p className='Sub_Title_Head text-capitalize'>
+								<span className=" title">IKIMINA</span>
+								<br/>
+								CYACU
+							</p>
+						</Col>
 
+						<Col lg={1}></Col>
+
+						<Col lg={6} md={12} sm={12} xs={12} className="Form_Side">
+							<Form
+								className='mt-0'
+							>
+								<p className='Sub_Title text-capitalize  text-center'>
+									LOGIN
+								</p>
 								<Form.Group>
 									<Form.Control
 										type='text'
 										name='username'
-										placeholder='User Name'
-										autoFocus={true}
+										placeholder='Username'
 									/>
 								</Form.Group>
-
 								<Form.Group>
 									<Form.Control
 										type='password'
@@ -44,26 +45,20 @@ export const LoginView = () => {
 										placeholder='Password'
 									/>
 								</Form.Group>
-
-								<a href={HomeView}>
 								<Button
-									// type='submit'
 									variant='primary'
-									className='btn-block mt-4 py-3'
-									style={{ fontSize: '12px' }}
+									className='btn-block mt-4 py-2 px-4 text-bold'
+									style={{ fontSize: '14px' }}
 								>
 									<>
-									 Sign In
+									 Login
 									</>
 								</Button>
-								</a>
 							</Form>
-						</Col>
-						<Col lg={7}>
-							{<Image src={LoginImage} alt='Login' className='img-fluid' />}
 						</Col>
 					</Row>
 				</Container>
 			</section>
+		</>
 	);
 };
