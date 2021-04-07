@@ -22,6 +22,10 @@
   font-size: 14px;
 }
 
+.btn-outline-default :hover {
+  color: #ffffff;
+}
+
 .white {
   color: #ffffff;
   font-weight: 100;

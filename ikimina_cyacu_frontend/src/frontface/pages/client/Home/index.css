@@ -1,5 +1,5 @@
 .home-slide {
-  padding: 3%;
+  padding: 3.2%;
   background-color: linear-gradient(
     to bottom,
     transparent 0%,
@@ -27,7 +27,7 @@
   font-weight: bold;
 }
 
-.FormPadding {
+.WhitePanel_Home.FormPadding {
   padding: 0px 180px;
 }
 

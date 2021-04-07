@@ -17,7 +17,7 @@ export const RegistrationView = () => {
 									| Membership Registration Form
 							</p>
 								<p className='border-bottom mt-2'></p>
-								<Col lg={12} className='FormPadding'>
+								<Col lg={12} className='FormPadding '>
 									<Form
 										className='mt-0'
 									>

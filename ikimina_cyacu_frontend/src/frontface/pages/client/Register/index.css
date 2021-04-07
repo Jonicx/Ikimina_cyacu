@@ -1,5 +1,5 @@
 .register-slide {
-  padding: 3%;
+  padding: 3.2%;
   background-color: linear-gradient(
     to bottom,
     transparent 0%,
@@ -31,12 +31,12 @@
   font-weight: bold;
 }
 
-.FormPadding {
-  padding: 0px 180px;
+.WhitePanel_Registration .FormPadding {
+  padding: 0px 22%;
 }
 
 .TransparentPanel_Explanation {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .register-slide .TransparentPanel_Explanation p {

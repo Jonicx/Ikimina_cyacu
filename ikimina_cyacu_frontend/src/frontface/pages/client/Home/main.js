@@ -43,7 +43,7 @@ export const HomeView = () => {
                                  className='text-capitalize text-justify pl-4 pr-3 pb-5'
                                  style={{ fontSize: '12px' }}
                               >
-                                 Twitwa "IKIMINA CYACU" twe turi ikimina kitagira imipaka, 
+                                 Twitwa "IKIMINA CYACU" turi ikimina kitagira imipaka, 
                                  gikorera mu Rwanda no hirya no hino ku isi, 
                                  kikaba cyiganjemo abanyarwanda (n'ishuti zabo), kuko ari bo bagishinze.
                                  <br/>
@@ -60,7 +60,7 @@ export const HomeView = () => {
                                  className='text-uppercase text-center pl-2 pr-2 mb-4'
                                  style={{ fontSize: '14px' }}
                               >
-                                 Itandukaniro ryacu nabandi mwumvishe?
+                                 Itandukaniro ryacu nabandi mwumvise?
                               </p>
 
                               <p
@@ -99,13 +99,9 @@ export const HomeView = () => {
                               style={{ fontSize: '12px' }}
                            >
                            Gutanga amadolari 500$ no kuzana abantu babiri
-                           na bo bakazinjra bujuje ibyo bintu bibiri,gutyo bitewe na buri wese
+                           na bo bakazinjira bujuje ibyo bintu bibiri,gutyo bitewe na buri wese
                            itariki yinjiriyeho, akabara iminsi 21, hashira
                            akazahabwa ibihumbi 4000$
-                           {/*  gutyo ...Buri muntu wese winjiye, nyuma 
-                           y'icyumweru kimwe (iminsi 7) abantu be babiri 
-                           na bo barinjira (bakaza na bafite 500$ n'abantu 
-                           babiri gutyo gutyo, hanyuma  */}
                            <br/>
                            </p>
                            </div>

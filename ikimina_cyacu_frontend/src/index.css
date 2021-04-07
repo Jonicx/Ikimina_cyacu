@@ -31,10 +31,10 @@ a,
 a:hover,
 a:active,
 a:focus {
-  text-decoration-color: none !important;
+  /* text-decoration-color: none !important; */
   text-decoration: none !important;
   outline: none;
-  color: inherit;
+  /* color: inherit; */
 }
 
 a.disabled {
@@ -113,6 +113,5 @@ i {
 .btn-outline-default:hover,
 .btn-outline-default:active,
 .btn-outline-default:focus {
-  background: #000000;
   color: #ffffff;
 }
