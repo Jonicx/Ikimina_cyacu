@@ -1,5 +1,5 @@
 .Login-slide .title {
-  font-size: 75px;
+  font-size: 62px;
   color: rgb(255, 255, 255);
   font-weight: 600 !important;
   font-family: Tahoma;
@@ -7,14 +7,14 @@
   text-align: center !important;
 }
 .Login-slide .Sub_Title {
-  font-size: 25px;
+  font-size: 20px;
   color: rgb(255, 255, 255);
   font-weight: bold !important;
   font-family: Arial;
 }
 
 .Login-slide .Sub_Title_Head {
-  font-size: 35px;
+  font-size: 18px;
   color: rgb(255, 255, 255);
   font-weight: bold !important;
   font-family: Arial;
@@ -23,7 +23,7 @@
 }
 
 .Login-slide {
-  padding: 270px;
+  padding: 18%;
   background-color: linear-gradient(
     to bottom,
     transparent 0%,
@@ -40,5 +40,6 @@
 }
 
 .Form_Side {
-  padding: 0px 10px;
+  padding: 0px 20px;
+  margin-bottom: 1%;
 }

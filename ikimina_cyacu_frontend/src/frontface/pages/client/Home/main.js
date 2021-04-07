@@ -1,68 +1,18 @@
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import Adminicon from '../../../../../src/assets/icons8_school_director_48.png';
-import HomeIcon from '../../../../../src/assets/home_16pxn.png';
-import PaperIcon from '../../../../../src/assets/paperWhite.png';
-import GridIcon from '../../../../../src/assets/grid_16px.png';
-import LogOutIcon from '../../../../../src/assets/logout_rounded_left_16px.png';
 import WhyIkiminaCyacu from '../../../../assets/worker-with-doubts_1012-193.jpg';
 import itandukaniro from '../../../../assets/different.jpg';
 import JoinUs from '../../../../assets/360_F_260290857_5wUoTu0EpooLJMHmGtO3j2lgHxEPrA2n.jpg';
 import './index.css';
+import AppLayout from '../../../layouts/AppLayout';
+import { SlideBar } from '../../../components/SlideBar';
 
-export const Home = () => {
+export const HomeView = () => {
 	return (
-		<>
+		<AppLayout>
 			<section className='home-slide'>
 				<Container>
 					<Row>
-						<Col lg={3} className='Home_View'>
-							<p className=' mt-3 mb-0 title text-capitalize text-bold text-center'>
-								| IKIMINA CYACU |
-						</p>
-							<p className='border-bottom mt-2'></p>
-
-							<p className=' mt-0 Admin_Name text-capitalize text-center'>
-								<img src={Adminicon} alt="icon" className="mb-0 " /> <br />
-							Admin
-						</p>
-							<p className='border-bottom mt-2 mb-1'></p>
-
-							<Col lg={12} md={12} sm={12} xs={12}>
-								<p className='text-left text-bold text-center'>
-									<a href className='btn btn-outline-default text-center text-bold  py-0 mt-3'
-									>
-										<img src={HomeIcon} alt="icon" className="mb-2 mt-2 " />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}{" "}
-									Home
-								</a>
-								</p>
-
-								<p className='text-left text-bold text-center'>
-									<a href className='btn btn-outline-default text-center text-bold  py-0 mt-3'
-									>
-										<img src={PaperIcon} alt="icon" className="mb-2 mt-2" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-									Form
-								</a>
-								</p>
-								<p className='text-left text-bold text-center'>
-									<a href className='btn btn-outline-default text-center text-bold  py-0 mt-3'
-									>
-										<img src={GridIcon} alt="icon" className="mb-2 mt-2 " />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-									Tree
-								</a>
-								</p>
-
-								<br /><br /><br /><br /><br /><br /><br />
-
-								<p className='text-left text-bold text-center'>
-									<a href className='btn btn-outline-default text-center text-bold py-0 mt-3'
-									>
-										<img src={LogOutIcon} alt="icon" className="mb-2 mt-2 " />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-									Logout
-								</a>
-								</p>
-							</Col>
-						</Col>
-
+                  <SlideBar></SlideBar>
                   <Col lg={9} className='WhitePanel_Home '>
                      <br />
                      <p className=' mt-0 mb-0 title text-capitalize text-bold'>
@@ -165,6 +115,6 @@ export const Home = () => {
 					</Row>
 				</Container>
 			</section>
-		</>
+		</AppLayout>
 	);
 };

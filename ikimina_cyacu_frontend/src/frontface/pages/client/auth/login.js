@@ -6,15 +6,18 @@ import {
 	Button
 } from 'react-bootstrap';
 import './index.css';
-
+import AppLayout from '../../../layouts/AppLayout';
+import { Link } from 'react-router-dom';
+import { reverse } from 'named-urls';
+import RoutesName from '../../../../app/config/routes';
 
 export const LoginView = () => {
 	return (
-		<>
+		<AppLayout>
 			<section className='Login-slide' >
 				<Container>
 					<Row>
-						<Col lg={5} md={12} sm={12} xs={12} className="Form_Side mt-4">
+						<Col lg={3} md={12} sm={12} xs={12} className="Form_Side mt-4">
 							<p className='Sub_Title_Head text-capitalize'>
 								<span className=" title">IKIMINA</span>
 								<br/>
@@ -22,7 +25,7 @@ export const LoginView = () => {
 							</p>
 						</Col>
 
-						<Col lg={1}></Col>
+						<Col lg={3}></Col>
 
 						<Col lg={6} md={12} sm={12} xs={12} className="Form_Side">
 							<Form
@@ -45,6 +48,7 @@ export const LoginView = () => {
 										placeholder='Password'
 									/>
 								</Form.Group>
+								<Link to={reverse(RoutesName.home)}>
 								<Button
 									variant='primary'
 									className='btn-block mt-4 py-2 px-4 text-bold'
@@ -54,11 +58,12 @@ export const LoginView = () => {
 									 Login
 									</>
 								</Button>
+								</Link>
 							</Form>
 						</Col>
 					</Row>
 				</Container>
 			</section>
-		</>
+		</AppLayout>
 	);
 };
