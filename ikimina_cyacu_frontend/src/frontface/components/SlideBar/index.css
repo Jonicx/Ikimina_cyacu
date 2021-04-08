@@ -22,11 +22,13 @@
   font-size: 14px;
 }
 
-.btn-outline-default :hover {
-  color: #ffffff;
-}
-
 .white {
+  color: #ffffff;
+  font-weight: 100;
+  font-family: Arial;
+  font-size: 14px;
+}
+.white :hover {
   color: #ffffff;
   font-weight: 100;
   font-family: Arial;

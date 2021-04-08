@@ -7,6 +7,7 @@ const RoutesName = {
 	}),
 	pages: include('/pages', {
 		register: 'Membership-registration',
+		adminLog: 'Admin-Log',
 	}),
 };
 

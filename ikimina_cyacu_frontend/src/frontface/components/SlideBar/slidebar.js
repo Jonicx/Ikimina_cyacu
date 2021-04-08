@@ -43,18 +43,19 @@ export const SlideBar = () => {
 						Form
 					</Link>
 					</p>
-					<p className='text-left text-bold text-center'>
-						<a href className='btn btn-outline-default text-center text-bold  py-0 mt-3'
-						>
+					<p>
+						<a href className='btn btn-outline-default text-center text-bold  py-0 mt-3'>
 							<img src={GridIcon} alt="icon" className="mb-2 mt-2 " />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
 						Tree
-					</a>
+						</a>
 					</p>
 
 					<br /><br /><br /><br /><br />
-					<p className='text-left text-bold text-center white'>
+					<Link to={reverse(RoutesName.pages.adminLog)} className='text-left text-bold text-center white'>
+					<p >
 						Last LogOut: 18:00 11th/3/2020
 					</p>
+					</Link>
 
 					<p className='text-left text-bold text-center'>
 						<Link to={reverse(RoutesName.auth.login)} href className='btn btn-outline-default text-center text-bold py-0 mt-3'

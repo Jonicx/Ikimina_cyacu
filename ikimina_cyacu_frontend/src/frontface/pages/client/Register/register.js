@@ -56,7 +56,7 @@ export const RegistrationView = () => {
 												/>
 											</Col>
 											<Form.Row>
-												<Col lg={6} xs={6}>
+												<Col lg={6} xs={12}>
 													<Button
 														type='submit'
 														disabled
@@ -66,7 +66,7 @@ export const RegistrationView = () => {
 														Update
 												</Button>
 												</Col>
-												<Col lg={6} xs={6}>
+												<Col lg={6} xs={12}>
 													<Button
 														type='submit'
 														variant='primary'

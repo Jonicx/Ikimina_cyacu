@@ -31,7 +31,7 @@ a,
 a:hover,
 a:active,
 a:focus {
-  /* text-decoration-color: none !important; */
+  text-decoration-color: none !important;
   text-decoration: none !important;
   outline: none;
   /* color: inherit; */
@@ -77,14 +77,14 @@ th {
   font-family: "Crimson Text", serif;
 }
 
-p,
+/* p,
 strong,
 span,
 small,
 td,
 li {
   font-family: "EB Garamond", serif;
-}
+} */
 
 .text-capitalize {
   text-transform: capitalize;

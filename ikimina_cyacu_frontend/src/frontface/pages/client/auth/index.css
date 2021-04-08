@@ -33,13 +33,30 @@
   background: url("../../../../assets/photo-1585264550248-1778be3b6368.jpg")
     no-repeat;
   box-shadow: inset 0 0 0 50vw rgba(0, 0, 0, 0.7);
-  background-size: contain;
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   position: relative;
 }
 
 .Form_Side {
   padding: 0px 20px;
   margin-bottom: 1%;
+}
+
+@media (max-width: 780px) {
+  .Form_Side {
+    padding: 84.5px 20px;
+  }
+
+  .Login-slide .title {
+    font-size: 46px;
+    margin-bottom: 0px;
+  }
+
+  .Login-slide .Sub_Title_Head {
+    font-size: 18px;
+    letter-spacing: 44px;
+    margin-bottom: 0px;
+  }
 }

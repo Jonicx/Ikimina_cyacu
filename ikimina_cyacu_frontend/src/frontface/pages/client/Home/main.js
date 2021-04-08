@@ -25,7 +25,7 @@ export const HomeView = () => {
                         </Col>
 
                         <Col lg={4} md={4} sm={4} xs={12} className='mb-0'>
-                           <div className='Image shadow'>
+                           <div className=' shadow'>
                            <Image
                               src={WhyIkiminaCyacu}
                               alt='Why ikimina cyacu'
@@ -53,7 +53,7 @@ export const HomeView = () => {
                         </Col>
 
                         <Col lg={4} md={4} sm={4} xs={12} className='mb-0'>
-                           <div className='Image shadow'>
+                           <div className=' shadow'>
                               <Image src={itandukaniro} alt='Itandukaniro ryacu' />
 
                               <p
@@ -81,7 +81,7 @@ export const HomeView = () => {
                         </Col>
 
                         <Col lg={4} md={4} sm={4} xs={12} className='mb-0'>
-                           <div className='Image shadow'>
+                           <div className=' shadow'>
                            <Image
                               src={JoinUs}
                               alt='Joining us'

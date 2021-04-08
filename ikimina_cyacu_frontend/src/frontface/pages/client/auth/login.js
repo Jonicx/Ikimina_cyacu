@@ -18,7 +18,7 @@ export const LoginView = () => {
 				<Container>
 					<Row>
 						<Col lg={3} md={12} sm={12} xs={12} className="Form_Side mt-4">
-							<p className='Sub_Title_Head text-capitalize'>
+							<p className='Sub_Title_Head text-capitalize text-center'>
 								<span className=" title">IKIMINA</span>
 								<br/>
 								CYACU
