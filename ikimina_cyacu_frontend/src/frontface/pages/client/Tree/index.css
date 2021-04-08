@@ -1,39 +1,39 @@
 .orgchart.myChart {
-    background-image: linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0) 10%,
-            rgba(0, 0, 0, 0) 10%
+  background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 10%,
+      rgba(0, 0, 0, 0) 10%
     ),
     linear-gradient(rgba(255, 255, 255, 0) 10%, rgba(0, 0, 0, 0) 10%) !important;
 }
 
 .orgchart.myChart > ul > li > ul li::before {
-    border-top-color: rgb(31, 31, 31)
+  border-top-color: rgb(31, 31, 31);
 }
 
 .orgchart.myChart > ul > li > ul li .oc-node::before,
 .orgchart.myChart ul li .oc-node:not(:only-child)::after {
-    background-color:rgb(31, 31, 31)
+  background-color: rgb(31, 31, 31);
 }
 
 .orgchart.myChart .oc-node .color {
-    box-sizing: border-box;
-    background-color: rgb(31, 31, 31);
-    color: #fff;
-    width: 200px;
-    height: 10px;
-    padding: 2px;
+  box-sizing: border-box;
+  background-color: #1169d9;
+  color: #fff;
+  width: 200px;
+  height: 10px;
+  padding: 2px;
 }
 
 .orgchart.myChart .oc-node .white {
-    box-sizing: border-box;
-    font-family: Tahoma;
-    font-size: 12px;
-    color: rgb(31, 31, 31);
-    background-color: #fff;
-    text-align: center;
-    width: 200px;
-    height: 60px;
-    padding: 2px;
-    border: 1px solid rgb(31, 31, 31);
+  box-sizing: border-box;
+  font-family: Tahoma;
+  font-size: 12px;
+  color: rgb(31, 31, 31);
+  background-color: #fff;
+  text-align: center;
+  width: 200px;
+  height: 60px;
+  padding: 2px;
+  border: 1px solid rgb(31, 31, 31);
 }
