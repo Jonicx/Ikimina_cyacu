@@ -11,6 +11,7 @@ decorator==4.4.2
 defusedxml==0.7.1
 entrypoints==0.3
 Flask==1.1.2
+flask-marshmallow==0.14.0
 Flask-RESTful==0.3.8
 Flask-SQLAlchemy==2.5.1
 greenlet==1.0.0
@@ -30,6 +31,8 @@ jupyter-core==4.7.1
 jupyterlab-pygments==0.1.2
 jupyterlab-widgets==1.0.0
 MarkupSafe==1.1.1
+marshmallow==3.11.1
+marshmallow-sqlalchemy==0.24.2
 mistune==0.8.4
 nbclient==0.5.3
 nbconvert==6.0.7
