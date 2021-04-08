@@ -1,0 +1,28 @@
+
+### GET request with parameter
+GET http://localhost:5000/auth/register
+Accept: application/json
+
+
+### Send POST request with json body
+POST http://localhost:5000/auth/admin/register
+Content-Type: application/json
+
+{
+  "firstName": "IRANZI",
+  "lastName": "Cedric",
+  "username": "admin",
+  "password": "admin",
+  "email": "pierratonoc@gmail.com",
+  "phoneNumber": "250789551152"
+}
+
+### Send POST request with json body
+POST http://localhost:5000/auth/admin/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin",
+  "ip":"41.186.31.251"
+}
