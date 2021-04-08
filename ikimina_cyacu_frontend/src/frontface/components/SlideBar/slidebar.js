@@ -47,13 +47,6 @@ export const SlideBar = () => {
               Form
             </Link>
           </p>
-          <p>
-            <a href className="btn btn-outline-default text-center text-bold  py-0 mt-3">
-              <img src={GridIcon} alt="icon" className="mb-2 mt-2 " />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-              Tree
-            </a>
-          </p>
           <p className="text-left text-bold text-center">
             <Link
               to={reverse(RoutesName.pages.members)}
