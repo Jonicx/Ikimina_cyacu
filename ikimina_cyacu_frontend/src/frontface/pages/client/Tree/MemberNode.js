@@ -11,7 +11,7 @@ const MemberNode = ({ nodeData }) => {
     <div>
       <div className="color">{}</div>
       <div className="white">
-        <b style={{ fontSize: "18px" }}> {nodeData.memberId}</b>
+        <b style={{ fontSize: "15px" }}> {nodeData.memberId}</b>
         <br />
         {`${nodeData.firstName} ${nodeData.lastName}`}
         <br />
