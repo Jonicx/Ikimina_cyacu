@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import { Provider } from 'react-redux';
+import Routes from './Routes';
+import store from './app/store';
+import { AUTHENTICATED } from './app/types';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const token = localStorage.token;
+
+	axios.defaults.baseURL = process.env.REACT_APP_BACKEND + '/api/v1/';
+	axios.defaults.headers.post['Content-Type'] =
+		'application/x-www-form-urlencoded';
+
+	if (token) {
+		store.dispatch({
+			type: AUTHENTICATED,
+			auth: true,
+			loading: false,
+			failed: false,
+		});
+
+		axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+	}
+
+	return (
+		<Provider store={store}>
+			<Routes />
+		</Provider>
+	);
+};
 
 export default App;
