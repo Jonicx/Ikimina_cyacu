@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import {NotificationContainer} from 'react-notifications';
-import { SlideBar } from '../components/SlideBar';
 
 import 'react-notifications/lib/notifications.css';
 
