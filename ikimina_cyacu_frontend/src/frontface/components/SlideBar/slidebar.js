@@ -37,7 +37,7 @@ export const SlideBar = () => {
             </Link>
           </p>
 
-          <p className="text-left text-bold text-center">
+          {/* <p className="text-left text-bold text-center">
             <Link
               to={reverse(RoutesName.pages.register)}
               className="btn btn-outline-default text-center text-bold  py-0 mt-3"
@@ -46,7 +46,7 @@ export const SlideBar = () => {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
               Form
             </Link>
-          </p>
+          </p> */}
           <p className="text-left text-bold text-center">
             <Link
               to={reverse(RoutesName.pages.members)}
@@ -58,6 +58,9 @@ export const SlideBar = () => {
             </Link>
           </p>
 
+          <br />
+          <br />
+          <br />
           <br />
           <br />
           <br />
