@@ -3,13 +3,17 @@ import Adminicon from "../../../../src/assets/icons8_school_director_48.png";
 import HomeIcon from "../../../../src/assets/home_16pxn.png";
 import GridIcon from "../../../../src/assets/grid_16px.png";
 import LogOutIcon from "../../../../src/assets/logout_rounded_left_16px.png";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { reverse } from "named-urls";
 import RoutesName from "../../../app/config/routes";
 
 import "./index.css";
+import AuthService from "../../../service/auth.service";
 
 export const SlideBar = () => {
+  const handleLogout = () => {
+    AuthService.logout();
+  };
   return (
     <>
       <Col lg={3} className="DarkPanel_Directions">
@@ -64,8 +68,7 @@ export const SlideBar = () => {
 
           <p className="text-left text-bold text-center">
             <Link
-              to={reverse(RoutesName.auth.login)}
-              href
+              onClick={handleLogout}
               className="btn btn-outline-default text-center text-bold py-0 mt-3"
             >
               <img src={LogOutIcon} alt="icon" className="mb-2 mt-2 " />
