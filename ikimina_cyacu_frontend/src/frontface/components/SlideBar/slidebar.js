@@ -1,7 +1,6 @@
 import { Col } from "react-bootstrap";
 import Adminicon from "../../../../src/assets/icons8_school_director_48.png";
 import HomeIcon from "../../../../src/assets/home_16pxn.png";
-import PaperIcon from "../../../../src/assets/paperWhite.png";
 import GridIcon from "../../../../src/assets/grid_16px.png";
 import LogOutIcon from "../../../../src/assets/logout_rounded_left_16px.png";
 import { Link } from "react-router-dom";
@@ -39,16 +38,6 @@ export const SlideBar = () => {
 
           <p className="text-left text-bold text-center">
             <Link
-              to={reverse(RoutesName.pages.register)}
-              className="btn btn-outline-default text-center text-bold  py-0 mt-3"
-            >
-              <img src={PaperIcon} alt="icon" className="mb-2 mt-2" />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-              Form
-            </Link>
-          </p>
-          <p className="text-left text-bold text-center">
-            <Link
               to={reverse(RoutesName.pages.members)}
               className="btn btn-outline-default text-center text-bold  py-0 mt-3"
             >
@@ -58,6 +47,9 @@ export const SlideBar = () => {
             </Link>
           </p>
 
+          <br />
+          <br />
+          <br />
           <br />
           <br />
           <br />
