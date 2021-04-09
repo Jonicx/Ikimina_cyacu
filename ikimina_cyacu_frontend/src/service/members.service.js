@@ -21,7 +21,7 @@ class MemberService {
       phoneNumber: phoneNumber,
     });
     const config = {
-      method: "add",
+      method: "post",
       url: API_URL + "/member/add",
       headers: {
         token: localStorage.getItem("token"),
