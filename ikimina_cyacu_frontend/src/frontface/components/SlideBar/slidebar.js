@@ -8,8 +8,12 @@ import { reverse } from "named-urls";
 import RoutesName from "../../../app/config/routes";
 
 import "./index.css";
+import AuthService from "../../../service/auth.service";
 
 export const SlideBar = () => {
+  const handleLogout = () => {
+    AuthService.logout();
+  };
   return (
     <>
       <Col lg={3} className="DarkPanel_Directions">
@@ -64,8 +68,7 @@ export const SlideBar = () => {
 
           <p className="text-left text-bold text-center">
             <Link
-              to={reverse(RoutesName.auth.login)}
-              href
+              onClick={handleLogout}
               className="btn btn-outline-default text-center text-bold py-0 mt-3"
             >
               <img src={LogOutIcon} alt="icon" className="mb-2 mt-2 " />

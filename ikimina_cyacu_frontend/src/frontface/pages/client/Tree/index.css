@@ -54,3 +54,6 @@
 .modal-open {
   max-height: 600px;
 }
+.id_card {
+  width: 8em;
+}

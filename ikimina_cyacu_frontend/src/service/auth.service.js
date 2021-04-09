@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "http://143.198.2.16:5555";
+const API_URL = require("../api").API_URL;
 
 class AuthService {
   login(username, password, ip) {
