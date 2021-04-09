@@ -16,20 +16,49 @@ import API_URL from "../../../../api";
 export const TreeView = () => {
   const [rawMembers, setRawMembers] = useState({});
   const [isBuilding, setIsBuilding] = useState(true);
+  const initialInputState = {
+    firstName: "",
+    lastName: "",
+    parentMemberId: "",
+    phoneNumber: "",
+  };
+  const [eachEntry, setEachEntry] = useState(initialInputState);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const loadMembers = () => {
     MemberService.getAllMembers().then((res) => {
       const [processedData] = UtilServices.processData(res.data);
       setRawMembers(processedData);
       setIsBuilding(false);
     });
-  }, [rawMembers]);
+  };
+
+  useEffect(() => {
+    loadMembers();
+  }, []);
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const loading = useSelector((store) => store.AuthReducer.loading);
+  const handleInputChange = (e) => {
+    setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    setIsLoading(true);
+    const { firstName, lastName, parentMemberId, phoneNumber } = eachEntry;
+    MemberService.register(firstName, lastName, parentMemberId, phoneNumber)
+      .then((newMember) => {
+        console.log(newMember);
+        window.alert(newMember.data.message);
+        setIsLoading(false);
+
+        loadMembers();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <AppLayout>
       <section className="home-slide">
@@ -100,9 +129,10 @@ export const TreeView = () => {
                               <Form.Control
                                 type="text"
                                 id="fname"
-                                name="firstname"
+                                name="firstName"
+                                onChange={handleInputChange}
                                 placeholder="First Name"
-                                disabled={loading ? true : false}
+                                disabled={isLoading}
                                 autoFocus={true}
                               />
                             </Col>
@@ -110,8 +140,9 @@ export const TreeView = () => {
                               <Form.Control
                                 type="text"
                                 id="sname"
-                                name="Surname"
-                                disabled={loading ? true : false}
+                                name="lastName"
+                                onChange={handleInputChange}
+                                disabled={isLoading}
                                 placeholder="Sur Name"
                               />
                             </Col>
@@ -119,8 +150,9 @@ export const TreeView = () => {
                               <Form.Control
                                 type="number"
                                 id="tel"
-                                name="tel"
-                                disabled={loading ? true : false}
+                                name="phoneNumber"
+                                onChange={handleInputChange}
+                                disabled={isLoading}
                                 placeholder="Telephone"
                               />
                             </Col>
@@ -128,40 +160,40 @@ export const TreeView = () => {
                               <Form.Control
                                 type="text"
                                 id="orientation"
-                                name="orientation"
-                                disabled={loading ? true : false}
+                                name="parentMemberId"
+                                onChange={handleInputChange}
+                                disabled={isLoading}
                                 placeholder="Orientation"
                               />
                             </Col>
                             <Form.Row>
                               <Col lg={6} xs={12}>
-                                <Button
-                                  className="btn-block py-2 mt-4"
-                                  style={{ fontSize: "14px" }}
-                                  variant="secondary"
-                                  onClick={handleClose}
-                                >
-                                  Close
-                                </Button>
+                                {!isLoading && (
+                                  <Button
+                                    className="btn-block py-2 mt-4"
+                                    style={{ fontSize: "14px" }}
+                                    variant="secondary"
+                                    onClick={handleClose}
+                                  >
+                                    Close
+                                  </Button>
+                                )}
                               </Col>
                               <Col lg={6} xs={12}>
                                 <Button
-                                  type="submit"
                                   variant="primary"
+                                  onClick={handleSubmit}
                                   className="btn-block py-2 mt-4"
                                   style={{ fontSize: "14px" }}
                                 >
-                                  {loading ? (
-                                    true ||
-                                    false(
-                                      <Spinner
-                                        as="span"
-                                        animation="grow"
-                                        role="status"
-                                        aria-hidden="true"
-                                        size="sm"
-                                      ></Spinner>
-                                    )
+                                  {isLoading ? (
+                                    <Spinner
+                                      as="span"
+                                      animation="border"
+                                      size="sm"
+                                      role="status"
+                                      aria-hidden="true"
+                                    ></Spinner>
                                   ) : (
                                     <>
                                       <i className="fa fa-check-circle"></i> Save
