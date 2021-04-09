@@ -8,15 +8,24 @@ const propTypes = {
 
 const MemberNode = ({ nodeData }) => {
   return (
-    <div>
-      <div className="color">{}</div>
-      <div className="white">
-        <b style={{ fontSize: "15px" }}> {nodeData.memberId}</b>
-        <br />
-        {`${nodeData.firstName} ${nodeData.lastName}`}
-        <br />
-      </div>
-    </div>
+    <>
+      {nodeData ? (
+        <div>
+          <div className="color">{}</div>
+          <div className="white">
+            <strong style={{ fontSize: "15px", margin: "0px" }}>
+              {" "}
+              {nodeData.memberId}
+            </strong>
+            <br />
+            {`${nodeData.firstName} ${nodeData.lastName}`}
+            <br />
+          </div>
+        </div>
+      ) : (
+        <div>Loading ...</div>
+      )}
+    </>
   );
 };
 

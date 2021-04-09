@@ -3,7 +3,7 @@ import Adminicon from "../../../../src/assets/icons8_school_director_48.png";
 import HomeIcon from "../../../../src/assets/home_16pxn.png";
 import GridIcon from "../../../../src/assets/grid_16px.png";
 import LogOutIcon from "../../../../src/assets/logout_rounded_left_16px.png";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { reverse } from "named-urls";
 import RoutesName from "../../../app/config/routes";
 

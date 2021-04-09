@@ -1,29 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Form, Button, Spinner, Modal } from "react-bootstrap";
 import OrganizationChart from "@dabeng/react-orgchart";
+import UserCard from "./UserCard";
 import MemberNode from "./MemberNode";
+
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
 import { SlideBar } from "../../../components/SlideBar";
-import { useSelector } from "react-redux";
-
 import authHeader from "../../../../service/auth-header";
 import MemberService from "../../../../service/members.service";
 import UtilServices from "../../../../service/util.service";
 
-import API_URL from "../../../../api";
-
 export const TreeView = () => {
-  const [rawMembers, setRawMembers] = useState({});
-  const [isBuilding, setIsBuilding] = useState(true);
   const initialInputState = {
     firstName: "",
     lastName: "",
     parentMemberId: "",
     phoneNumber: "",
   };
+
+  const [rawMembers, setRawMembers] = useState({});
+  const [afterRegister, setAfterRegister] = useState({});
+  const [isBuilding, setIsBuilding] = useState(true);
   const [eachEntry, setEachEntry] = useState(initialInputState);
   const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   const loadMembers = () => {
     MemberService.getAllMembers().then((res) => {
@@ -37,8 +39,6 @@ export const TreeView = () => {
     loadMembers();
   }, []);
 
-  const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleInputChange = (e) => {
@@ -49,16 +49,18 @@ export const TreeView = () => {
     const { firstName, lastName, parentMemberId, phoneNumber } = eachEntry;
     MemberService.register(firstName, lastName, parentMemberId, phoneNumber)
       .then((newMember) => {
-        console.log(newMember);
-        window.alert(newMember.data.message);
         setIsLoading(false);
-
+        setShow(false);
+        setAfterRegister(newMember.data.member);
+        setModalShow(true);
         loadMembers();
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  const componentRef = useRef();
+
   return (
     <AppLayout>
       <section className="home-slide">
@@ -224,6 +226,24 @@ export const TreeView = () => {
               </Row>
             </Col>
           </Row>
+          {/* Modal Preview */}
+          <Modal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body>
+              <UserCard userData={afterRegister} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button>Print</Button>
+            </Modal.Footer>
+          </Modal>
+
+          {/* End of Modal Preview */}
         </Container>
       </section>
     </AppLayout>
