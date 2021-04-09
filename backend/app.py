@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from flask_restful import Api, Resource, abort, reqparse
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy.sql import func
@@ -16,6 +17,12 @@ api = Api(app)
 app.config['SECRET_KEY'] = '!9m@S-dThyIlW[pHQbN^'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/ujamaDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+CORS(app)
+cors = CORS(app, resource={
+    r"/*":{
+        "origins":"*"
+    }
+})
 ma = Marshmallow(app)
 hash_id = Hashids(alphabet='0123456789ABCDEF', salt='IKIMINA', min_length=6)
 db = SQLAlchemy(app)
