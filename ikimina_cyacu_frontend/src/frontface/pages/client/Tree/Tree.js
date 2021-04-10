@@ -2,14 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Form, Button, Spinner, Modal } from "react-bootstrap";
 import OrganizationChart from "@dabeng/react-orgchart";
 import UserCard from "./UserCard";
+import printIcon from '../../../../assets/print_30px.png'
+import Register from '../../../../assets/registration_30px.png'
+import Logout from '../../../../assets/logout_rounded_left_30px.png'
+import Home from '../../../../assets/home_25px.png'
 import MemberNode from "./MemberNode";
-
+import Printer, { print } from 'react-pdf-print'
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
-import { SlideBar } from "../../../components/SlideBar";
-import authHeader from "../../../../service/auth-header";
 import MemberService from "../../../../service/members.service";
 import UtilServices from "../../../../service/util.service";
+import { Link } from "react-router-dom";
+import { reverse } from "named-urls";
+import RoutesName from "../../../../app/config/routes";
+import AuthService from "../../../../service/auth.service";
 
 export const TreeView = () => {
   const initialInputState = {
@@ -18,6 +24,13 @@ export const TreeView = () => {
     parentMemberId: "",
     phoneNumber: "",
   };
+
+  const handleLogout = () => {
+    AuthService.logout();
+  };
+
+  const ids = ['1']
+  const idss = ['1']
 
   const [rawMembers, setRawMembers] = useState({});
   const [afterRegister, setAfterRegister] = useState({});
@@ -66,8 +79,8 @@ export const TreeView = () => {
       <section className="home-slide">
         <Container>
           <Row>
-            <SlideBar></SlideBar>
-            <Col lg={9} className="WhitePanel_Home ">
+            {/* <SlideBar></SlideBar> */}
+            <Col lg={12} className="WhitePanel_Home ">
               <br />
               <Row class="justify-content-center">
                 <Col lg={4} md={12} sm={12}>
@@ -77,10 +90,10 @@ export const TreeView = () => {
                 </Col>
                 <Col lg={5} md={12} sm={12}>
                   <Row class="justify-content-center">
-                    <Form class="mt-0">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Form class="mt-0">
                       <div class=" row no-gutters mb-0">
                         <div className="col">
-                          <Form.Control
+                        <Form.Control
                             type="search"
                             placeholder="Telephone/Code"
                             className="form-control-lg "
@@ -101,14 +114,28 @@ export const TreeView = () => {
                   </Row>
                 </Col>
                 <Col lg={3} md={12} sm={12}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Button
-                    className=" mt-0 mb-0 title text-capitalize"
-                    variant="primary"
-                    onClick={handleShow}
-                  >
-                    Register
-                  </Button>
+                  <Row>
+                    <Link
+                        className=""
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src={printIcon} alt="Print all"/>
+                    </Link>
+                    <Link
+                        className=""
+                      >
+                        &nbsp;&nbsp;<img  className=" mt-0 mb-0 title text-capitalize" onClick={handleShow}   src={Register} alt="Register"/>
+                    </Link>
+                    <Link
+                        to={reverse(RoutesName.home)}
+                        className=""
+                      >
+                        &nbsp;&nbsp;<img  src={Home} alt="Home"/>
+                    </Link>
+                    <Link
+                      >
+                        &nbsp;<img  src={Logout} alt="Logout user" onClick={handleLogout}/>
+                    </Link>
+                  </Row>
                   <Modal
                     show={show}
                     onHide={handleClose}
@@ -215,34 +242,41 @@ export const TreeView = () => {
               <p className="border-bottom mt-2"></p>
               <Row>
                 <Col lg={12} className="mb-3">
-                  <OrganizationChart
-                    datasource={rawMembers}
-                    chartClass="myChart"
-                    zoom={true}
-                    pan={true}
-                    NodeTemplate={MemberNode}
-                  />
+                  <Printer>
+                    <div id={ids[0]} style={{ width:'295mm'}}>
+                      <OrganizationChart
+                        datasource={rawMembers}
+                        chartClass="myChart"
+                        zoom={true}
+                        pan={true}
+                        NodeTemplate={MemberNode}
+                      />
+                    </div>
+                  </Printer>
                 </Col>
               </Row>
             </Col>
           </Row>
           {/* Modal Preview */}
-          <Modal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Header closeButton></Modal.Header>
-            <Modal.Body>
-              <UserCard userData={afterRegister} />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button>Print</Button>
-            </Modal.Footer>
-          </Modal>
-
+          <Printer>
+            <div id={idss[0]} style={{ width:'220mm', height: '297mm' }}>
+              <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <Modal.Header closeButton></Modal.Header>
+                <Modal.Body>
+                  <UserCard userData={afterRegister} />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={() => print(idss)} type='button'>Print</Button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+          </Printer>
           {/* End of Modal Preview */}
         </Container>
       </section>

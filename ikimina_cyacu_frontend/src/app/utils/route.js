@@ -16,19 +16,19 @@ export const CustomRouter = ({
 					<Component {...props} />
 				) : authenticated === true && rest.access === false ? (
 					<Redirect
-						to={{
-							pathname: RoutesName.auth.order,
-							state: { from: props.children },
-						}}
+						// to={{
+						// 	pathname: RoutesName.auth.order,
+						// 	state: { from: props.children },
+						// }}
 					/>
-				) : authenticated === false && rest.access === true ? (
+				) /* : authenticated === false && rest.access === true ? (
 					<Redirect
-						to={{
-							pathname: RoutesName.auth.login,
-							state: { from: props.children },
-						}}
+						// to={{
+						// 	pathname: RoutesName.auth.login,
+						// 	state: { from: props.children },
+						// }}
 					/>
-				) : (
+				) */ : (
 					<Component {...props} />
 				)
 			}
