@@ -190,6 +190,7 @@ class RegisterMember(Resource):
                     setattr(parentMember, 'members', parentMember.members + 1)
                     db.session.commit()
 
+
                 return {"message": "Member has been Added successfully", "member": memberSchema.dump(newMember)}, 200
 
             else:
