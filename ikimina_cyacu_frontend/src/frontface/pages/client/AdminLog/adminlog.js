@@ -1,12 +1,10 @@
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
 import { SlideBar } from "../../../components/SlideBar";
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-// import axios from "axios";
-// import authHeader from "../../../../service/auth-header";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 export const AdminLogView = () => {
-//   const [logs, setLogs] = useState([]);
+  //   const [logs, setLogs] = useState([]);
 
   return (
     <AppLayout>
@@ -24,16 +22,21 @@ export const AdminLogView = () => {
               <p className="border-bottom mt-2"></p>
 
               <Col>
-						<div>
-							<BootstrapTable
-								pagination>
-								<TableHeaderColumn dataField='Column_Number' isKey>#</TableHeaderColumn>
-								<TableHeaderColumn dataField='Username'>Username</TableHeaderColumn>
-								<TableHeaderColumn dataField='Action'>Action</TableHeaderColumn>
-								<TableHeaderColumn dataField='Description'>Description</TableHeaderColumn>
-								<TableHeaderColumn dataField='Time_stamp'>Timestamp</TableHeaderColumn>
-							</BootstrapTable>
-						</div>
+                <div>
+                  <BootstrapTable pagination>
+                    <TableHeaderColumn dataField="Column_Number" isKey>
+                      #
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField="Username">Username</TableHeaderColumn>
+                    <TableHeaderColumn dataField="Action">Action</TableHeaderColumn>
+                    <TableHeaderColumn dataField="Description">
+                      Description
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField="Time_stamp">
+                      Timestamp
+                    </TableHeaderColumn>
+                  </BootstrapTable>
+                </div>
               </Col>
             </Col>
           </Row>
