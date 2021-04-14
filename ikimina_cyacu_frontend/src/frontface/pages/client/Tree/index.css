@@ -18,17 +18,17 @@
 
 .orgchart.myChart .oc-node .color {
   box-sizing: border-box;
-  background-color: #1169d9;
+  background-color: #0088ff;
   color: #fff;
   width: 150px;
-  height: 5px;
+  height: 2px;
   padding: 2px;
 }
 
 .orgchart.myChart .oc-node .white {
   box-sizing: border-box;
   font-family: Tahoma;
-  font-size: 12px;
+  font-size: 13.3px;
   color: rgb(31, 31, 31);
   background-color: #fff;
   text-align: center;
@@ -42,14 +42,6 @@
   height: 10px;
   margin-top: 0px;
 }
-
-/* .form-control-borderless:hover,
-.form-control-borderless:active,
-.form-control-borderless:focus {
-  border: none;
-  outline: none;
-  box-shadow: none;
-} */
 
 .modal-open {
   max-height: 600px;

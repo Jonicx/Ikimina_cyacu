@@ -7,17 +7,18 @@ import {
   Button,
   Spinner,
   Modal,
-  ButtonToolbar,
 } from "react-bootstrap";
+import printIcon from '../../../../assets/print_32px.png'
 import OrganizationChart from "@dabeng/react-orgchart";
 import UserCard from "./UserCard";
 import MemberNode from "./MemberNode";
 
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
-import { SlideBar } from "../../../components/SlideBar";
 import MemberService from "../../../../service/members.service";
 import UtilServices from "../../../../service/util.service";
+import { Link } from "react-router-dom";
+import { SlidebarPages } from '../../../components/SidebarPages';
 
 export const TreeView = () => {
   const orgchart = useRef();
@@ -27,7 +28,6 @@ export const TreeView = () => {
     parentMemberId: "",
     phoneNumber: "",
   };
-
   const [rawMembers, setRawMembers] = useState({});
   const [afterRegister, setAfterRegister] = useState({});
   const [isBuilding, setIsBuilding] = useState(true);
@@ -79,19 +79,20 @@ export const TreeView = () => {
       <section className="home-slide">
         <Container>
           <Row>
-            <SlideBar></SlideBar>
-            <Col lg={9} className="WhitePanel_Home ">
+            <SlidebarPages></SlidebarPages>
+            <Col lg={10} className="WhitePanel_Home ">
               <br />
               <Row class="justify-content-center">
-                <Col lg={3} md={12} sm={12}>
-                  <p className="mt-3 mb-0 title text-capitalize text-bold">
-                    &nbsp; | Membership Tree
+                <Col lg={4} md={4} sm={4}>
+                  <p className="mt-2 mb-0 title text-capitalize text-bold">
+                  &nbsp;&nbsp; | Membership Tree
                   </p>
                 </Col>
-                <Col lg={3} md={12} sm={12}>
+                <Col lg={4} md={4} sm={4}>
                   <Row class="justify-content-center">
-                    <Form class="mt-0">
-                      <div class=" row no-gutters mb-0">
+
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Form class="mt-0">
+                      <div class=" row no-gutters mb-1">
                         <div className="col">
                           <Form.Control
                             type="search"
@@ -102,7 +103,7 @@ export const TreeView = () => {
                         </div>
                         <div class="col-auto">
                           <Button
-                            className=" mt-0 mb-0 title text-capitalize"
+                            className=" mt-0 mb-0 title text-capitalize "
                             type="submit"
                             variant="primary"
                           >
@@ -113,29 +114,35 @@ export const TreeView = () => {
                     </Form>
                   </Row>
                 </Col>
-                <Col lg={3} md={12} sm={12}>
+                <Col lg={4} md={4} sm={4}>
+                  <Row>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
                   <Button
-                    className=" mt-0 mb-0 title text-capitalize"
-                    variant="secondary"
-                    onClick={exportTo}
-                  >
-                    Print
-                  </Button>
-                </Col>
-                <Col lg={3} md={12} sm={12}>
-                  <Button
-                    className=" mt-0 mb-0 title text-capitalize"
+                    className=" mt-0 mb-0 title text-capitalize "
+                    type="submit"
                     variant="primary"
-                    onClick={handleShow}
+                    onClick={handleShow} 
                   >
                     Register
                   </Button>
+                    <Link
+                        className=""
+                      >
+                        &nbsp;&nbsp;<img src={printIcon} alt="Print all" onClick={exportTo} />
+                    </Link>
+                  </Row>
                 </Col>
                 <Modal
                   show={show}
                   onHide={handleClose}
                   backdrop="static"
                   keyboard={false}
+                  centered
                 >
                   <Modal.Header>
                     <Modal.Title
@@ -233,7 +240,7 @@ export const TreeView = () => {
                   </Modal.Body>
                 </Modal>
               </Row>
-              <p className="border-bottom mt-2"></p>
+              <p className="border-bottom mt-0"></p>
               <Row>
                 <Col lg={12} className="mb-3">
                   <OrganizationChart
@@ -251,7 +258,9 @@ export const TreeView = () => {
           {/* Modal Preview */}
           <Modal
             show={modalShow}
-            onHide={() => setModalShow(false)}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered

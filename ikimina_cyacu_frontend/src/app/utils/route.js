@@ -1,47 +1,34 @@
-import { Redirect, Route } from 'react-router-dom';
-import {connect} from 'react-redux';
-import {PropTypes} from 'prop-types';
-import RoutesName from '../config/routes';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export const CustomRouter = ({
-	component: Component,
-	authenticated,
-	...rest
-}) => {
-	return (
-		<Route
-			{...rest}
-			render={props =>
-				authenticated === rest.auth && rest.access === true ? (
-					<Component {...props} />
-				) : authenticated === true && rest.access === false ? (
-					<Redirect
-						to={{
-							pathname: RoutesName.auth.order,
-							state: { from: props.children },
-						}}
-					/>
-				) : authenticated === false && rest.access === true ? (
-					<Redirect
-						to={{
-							pathname: RoutesName.auth.login,
-							state: { from: props.children },
-						}}
-					/>
-				) : (
-					<Component {...props} />
-				)
-			}
-		/>
-	);
-};
+import {
+  Route,
+  Redirect
+} from 'react-router-dom'
+import Auth from '../config/auth'
+import RoutesName from '../routes'
 
-CustomRouter.prototypes = {
-	authenticated: PropTypes.bool.isRequiredl,
-};
+const CustomRoute = ({ component: Component, ...rest }) => (
+  <Route
+    { ...rest }
+    render={ props =>
+      Auth.isUserAuthenticated() ? (
+        <Component { ...props } />
+      ) : (
+        <Redirect
+          to={ {
+				pathname: RoutesName.auth.login,
+            state: { from: props.children }
+          } }
+        />
+      )
+    }
+  />
+)
 
-const mapStateToProps = state => ({
-	authenticated: state.AuthReducer.authenticated,
-});
+CustomRoute.propTypes = {
+  component: PropTypes.any,
+  location: PropTypes.object
+}
 
-export default connect(mapStateToProps)(CustomRouter);
+export default CustomRoute;
