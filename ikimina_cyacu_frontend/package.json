@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "moment": "^2.29.1",
     "named-urls": "^2.0.0",
     "public-ip": "^4.0.3",
     "react": "^17.0.2",
