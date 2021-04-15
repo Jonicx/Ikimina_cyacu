@@ -39,7 +39,7 @@ class Auth {
     *
     */
    static deauthenticateUser () {
-     localStorage.removeItem('token')
+    return localStorage.removeItem('token') === null
    }
  
    /**

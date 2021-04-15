@@ -52,19 +52,29 @@ const Routes = () => {
       <Switch>
       <Route
        path={RoutesName.auth.login}
-       component={ LoginView } />
+       component={ LoginView } 
+       auth={false}
+       access={false}/>
       <CustomRoute 
       path={RoutesName.pages.adminLog}
-      component={ AdminLogView } />
+      component={ AdminLogView } 
+      auth={true}
+      access={true}/>
       <Route 
       path={RoutesName.pages.register}
-      component={ RegistrationView } />
+      component={ RegistrationView } 
+      auth={true}
+      access={true}/>
       <CustomRoute 
       path={RoutesName.pages.members}
-      component={ TreeView } />
+      component={ TreeView }
+      auth={true}
+      access={true}/>
       <CustomRoute 
       path={RoutesName.home}
-      component={ HomeView } />
+      component={ HomeView } 
+      auth={true}
+      access={true}/>
       </Switch>
     </HashRouter>
   );
