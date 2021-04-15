@@ -65,7 +65,7 @@ export const SlidebarPages = () => {
             <p>
               Last login:
               <br />
-              {`${moment(currentUser.lastLogin).format("DD/MM/YYYY hh:mm")}`}{" "}
+              {`${moment(currentUser.lastLogin).format("DD/MM/YYYY hh:mm A")}`}{" "}
             </p>
           </Link>
 
