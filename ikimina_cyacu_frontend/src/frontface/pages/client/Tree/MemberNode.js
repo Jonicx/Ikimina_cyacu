@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./index.css";
+const moment = require("moment");
 
 const propTypes = {
   nodeData: PropTypes.object.isRequired,
@@ -11,14 +12,23 @@ const MemberNode = ({ nodeData }) => {
     <>
       {nodeData ? (
         <div>
-          <div className="color">{}</div>
+          <div className={nodeData.level == 0 ? "red" : "green"}>{}</div>
           <div className="white">
-            <strong style={{ fontSize: "15px", margin: "0px" }}>
-              {" "}
-              {nodeData.memberId}
-            </strong>
+            <strong id="code"> {nodeData.memberId}</strong>
             <br />
-            {`${nodeData.firstName} ${nodeData.lastName}`}
+            <p>
+              {`${
+                nodeData.firstName
+                  ? nodeData.firstName.toUpperCase()
+                  : "Please wait!, Loading"
+              } ${nodeData.lastName ? nodeData.lastName : "..."}`}
+              <br />
+
+              {nodeData.createdAt
+                ? `Since: ${moment(nodeData.createdAt).format("DD/MM/YYYY")}`
+                : ""}
+            </p>
+
             <br />
           </div>
         </div>
