@@ -19,8 +19,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/ujamaDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 cors = CORS(app, resource={
-    r"/*":{
-        "origins":"*"
+    r"/*": {
+        "origins": "*"
     }
 })
 ma = Marshmallow(app)
@@ -43,6 +43,15 @@ class AdminModel(db.Model):
     lastLogin = db.Column(db.DateTime(), nullable=True)
 
 
+class AdminSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'firstName', 'lastName', 'username', 'phoneNumber', 'lastLogin')
+
+
+adminSchema = AdminSchema()
+adminsSchema = AdminSchema(many=True)
+
+
 class MemberModel(db.Model):
     __tablename__ = 'Members'
     id = db.Column(db.Integer, primary_key=True)
@@ -59,7 +68,8 @@ class MemberModel(db.Model):
 
 class MemberSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'memberId', 'firstName', 'lastName', 'phoneNumber', 'parentMemberId', 'members', 'level')
+        fields = (
+            'id', 'memberId', 'firstName', 'lastName', 'phoneNumber', 'parentMemberId', 'members', 'level', 'createdAt')
 
 
 memberSchema = MemberSchema()
@@ -73,6 +83,15 @@ class LogsModel(db.Model):
     activity = db.Column(db.Enum("AUTH", "CREATE", "UPDATE"), nullable=False)
     details = db.Column(db.String(100), nullable=False)
     timestamp = db.Column(db.DateTime(), server_default=func.now())
+
+
+class LogSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'adminId', 'activity', 'details', 'timestamp')
+
+
+logSchema = LogSchema()
+logsSchema = LogSchema(many=True)
 
 
 # db.create_all()
@@ -190,8 +209,8 @@ class RegisterMember(Resource):
                     setattr(parentMember, 'members', parentMember.members + 1)
                     db.session.commit()
 
-
-                return {"message": "Member has been Added successfully", "member": memberSchema.dump(newMember)}, 200
+                return {"message": "Member has been Added successfully", "member": memberSchema.dump(newMember),
+                        "orienation": memberSchema.dump(parentMember)}, 200
 
             else:
                 return {"message": f"Orientation with ID: {parentMember.memberId}, already has two members!"}
