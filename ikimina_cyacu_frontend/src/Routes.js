@@ -53,16 +53,16 @@ const Routes = () => {
       <Route
        path={RoutesName.auth.login}
        component={ LoginView } />
-      <Route 
+      <CustomRoute 
       path={RoutesName.pages.adminLog}
       component={ AdminLogView } />
       <Route 
       path={RoutesName.pages.register}
       component={ RegistrationView } />
-      <Route 
+      <CustomRoute 
       path={RoutesName.pages.members}
       component={ TreeView } />
-      <Route 
+      <CustomRoute 
       path={RoutesName.home}
       component={ HomeView } />
       </Switch>

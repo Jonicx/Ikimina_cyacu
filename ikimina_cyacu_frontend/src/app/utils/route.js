@@ -9,22 +9,22 @@ import Auth from '../config/auth'
 import RoutesName from '../routes'
 
 const CustomRoute = ({ component: Component, ...rest }) => (
-  <Route
+    <Route
     { ...rest }
-    render={ props =>
-      Auth.isUserAuthenticated() ? (
-        <Component { ...props } />
-      ) : (
-        <Redirect
-          to={ {
-				pathname: RoutesName.auth.login,
-            state: { from: props.children }
-          } }
-        />
-      )
-    }
-  />
-)
+      render={ props =>
+        Auth.isUserAuthenticated() === true ?(
+          <Component { ...props } />
+        ) : (
+          <Redirect
+            to={ {
+              pathname: RoutesName.auth.login,
+              state: { from: props.children }
+            } }
+          />
+        ) 
+      }
+    />
+  );
 
 CustomRoute.propTypes = {
   component: PropTypes.any,
