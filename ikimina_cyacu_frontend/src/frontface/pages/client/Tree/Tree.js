@@ -22,30 +22,32 @@ export const TreeView = () => {
   };
   const [rawMembers, setRawMembers] = useState({});
   const [afterRegister, setAfterRegister] = useState({});
-  const [isBuilding, setIsBuilding] = useState(true);
   const [eachEntry, setEachEntry] = useState(initialInputState);
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [filename, setFilename] = useState("ikimina_document");
-  const [fileextension, setFileextension] = useState("pdf");
 
   const loadMembers = () => {
     MemberService.getAllMembers().then((res) => {
       const [processedData] = UtilServices.processData(res.data);
       setRawMembers(processedData);
-      setIsBuilding(false);
     });
   };
 
   useEffect(() => {
     loadMembers();
-  }, []);
+  }, [rawMembers]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
+  };
+  const handleSearch = (e) => {
+    const { searchQuery } = eachEntry;
+    console.log(searchQuery);
+    setRawMembers((prevState) => ({ ...prevState }));
   };
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -63,7 +65,8 @@ export const TreeView = () => {
       });
   };
   const exportTo = () => {
-    orgchart.current.exportTo(filename, fileextension);
+    setFilename(...(filename + Date().toString()));
+    orgchart.current.exportTo(filename, "pdf");
   };
 
   return (
@@ -90,14 +93,17 @@ export const TreeView = () => {
                             type="search"
                             placeholder="Telephone/Code"
                             className="form-control-lg "
+                            name="searchQuery"
+                            onChange={handleInputChange}
                             style={{ textAlign: "center", fontSize: "13px" }}
                           />
                         </div>
                         <div class="col-auto">
                           <Button
                             className=" mt-0 mb-0 title text-capitalize "
-                            type="submit"
+                            type="button"
                             variant="primary"
+                            onClick={handleSearch}
                           >
                             Search
                           </Button>
