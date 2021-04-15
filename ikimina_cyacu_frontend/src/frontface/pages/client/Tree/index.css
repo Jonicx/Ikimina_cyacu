@@ -16,12 +16,21 @@
   background-color: rgb(31, 31, 31);
 }
 
-.orgchart.myChart .oc-node .color {
+.orgchart.myChart .oc-node .red {
   box-sizing: border-box;
-  background-color: #0088ff;
+  background-color: #ff0000;
   color: #fff;
-  width: 150px;
-  height: 2px;
+  width: 170px;
+  height: 6px;
+  padding: 2px;
+}
+
+.orgchart.myChart .oc-node .green {
+  box-sizing: border-box;
+  background-color: #00ff00;
+  color: #fff;
+  width: 170px;
+  height: 6px;
   padding: 2px;
 }
 
@@ -32,8 +41,8 @@
   color: rgb(31, 31, 31);
   background-color: #fff;
   text-align: center;
-  width: 150px;
-  height: 50px;
+  width: 170px;
+  height: 70px;
   padding: 2px;
   border: 1px solid rgb(31, 31, 31);
 }
@@ -48,4 +57,12 @@
 }
 .id_card {
   width: 8em;
+}
+
+#code {
+  color: #000000;
+  font-size: "25px";
+  margin: "0px";
+  padding: 2px;
+  font-weight: 300;
 }
