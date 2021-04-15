@@ -12,7 +12,7 @@ const MemberNode = ({ nodeData }) => {
     <>
       {nodeData ? (
         <div>
-          <div className={nodeData.level == 0 ? "red" : "green"}>{}</div>
+          <div className={nodeData.level === 0 ? "red" : "green"}>{}</div>
           <div className="white">
             <strong id="code"> {nodeData.memberId}</strong>
             <br />
