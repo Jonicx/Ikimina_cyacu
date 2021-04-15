@@ -248,7 +248,7 @@ export const TreeView = () => {
           {/* Modal Preview */}
           <Modal
             show={modalShow}
-            onHide={handleClose}
+            onHide={() => setModalShow(false)}
             backdrop="static"
             keyboard={false}
             size="lg"
