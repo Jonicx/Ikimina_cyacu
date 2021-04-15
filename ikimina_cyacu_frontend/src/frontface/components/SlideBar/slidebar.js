@@ -66,7 +66,7 @@ export const SlideBar = () => {
             to={reverse(RoutesName.pages.adminLog)}
             className="text-left text-bold text-center white"
           >
-            <p>
+            <p style={{ fontSize: "12px" }}>
               Last login:
               {`${moment(currentUser.lastLogin).format("DD/MM/YYYY hh:mm A")}`}{" "}
             </p>
