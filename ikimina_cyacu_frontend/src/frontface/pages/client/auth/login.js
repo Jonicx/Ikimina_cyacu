@@ -4,6 +4,9 @@ import { Container, Form, Row, Col, Button, Alert, Spinner } from "react-bootstr
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
 import AuthService from "../../../../service/auth.service";
+import { Link } from "react-router-dom";
+import { reverse } from "named-urls";
+import RoutesName from "../../../../app/routes";
 
 export const LoginView = () => {
   const initialInputState = { username: "", password: "" };
@@ -80,6 +83,7 @@ export const LoginView = () => {
                     value={password}
                   />
                 </Form.Group>
+                <Link to={reverse(RoutesName.home)}>
                 {!isLoading ? (
                   <Button
                     variant="primary"
@@ -106,6 +110,7 @@ export const LoginView = () => {
                     <span className="sr-only">Loading...</span>
                   </Button>
                 )}
+                </Link>
               </Form>
               <br />
               <Alert show={show} variant="danger">

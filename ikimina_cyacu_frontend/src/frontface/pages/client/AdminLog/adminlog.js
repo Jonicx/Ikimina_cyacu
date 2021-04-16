@@ -1,19 +1,19 @@
 import { Container, Row, Col } from "react-bootstrap";
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
-import { SlideBar } from "../../../components/SlideBar";
+import { SlidebarPages } from '../../../components/SidebarPages';
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+
 export const AdminLogView = () => {
-  //   const [logs, setLogs] = useState([]);
 
   return (
     <AppLayout>
       <section className="admin-slide">
         <Container>
           <Row>
-            <SlideBar></SlideBar>
+            <SlidebarPages></SlidebarPages>
             <Col
-              lg={9}
+              lg={10}
               className="WhitePanel_Admin table mb-0
 						"
             >

@@ -2,6 +2,7 @@ import axios from "axios";
 const API_URL = require("../api").API_URL;
 
 class AuthService {
+  
   login(username, password, ip) {
     return axios
       .post(API_URL + "/auth/admin/login", {
