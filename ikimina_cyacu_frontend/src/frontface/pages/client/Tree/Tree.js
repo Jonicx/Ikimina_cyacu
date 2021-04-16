@@ -16,9 +16,6 @@ export const TreeView = () => {
   const print = () =>{
     window.print();
   }
-  const printTree = () =>{
-    window.print();
-  }
   const orgchart = useRef();
   const initialInputState = {
     firstName: "",
@@ -46,7 +43,7 @@ export const TreeView = () => {
   }, [rawMembers]);
 
   const handleClose = () => setShow(false);
-  const handleClose1 = () => setShow(false);
+
   const handleShow = () => setShow(true);
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
@@ -258,7 +255,6 @@ export const TreeView = () => {
               </Row>
             </Col>
           </Row>
-          {/* Modal Preview */}
 
           <Modal
             show={modalShow}

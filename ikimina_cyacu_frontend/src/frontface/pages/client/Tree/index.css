@@ -59,7 +59,6 @@
   width: 8em;
 }
 
-
 .printme {
   display: none;
 }
@@ -69,14 +68,13 @@
   }
   .printme {
     display: block;
-    width: 100%;
   }
 
-#code {
-  color: #000000;
-  font-size: "25px";
-  margin: "0px";
-  padding: 2px;
-  font-weight: 300;
-
+  #code {
+    color: #000000;
+    font-size: "25px";
+    margin: "0px";
+    padding: 2px;
+    font-weight: 300;
+  }
 }
