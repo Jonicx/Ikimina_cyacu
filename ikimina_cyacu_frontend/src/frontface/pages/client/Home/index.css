@@ -48,3 +48,9 @@
   font-weight: 500;
   font-family: Tahoma;
 }
+
+@media (max-width: 780px) {
+  .Images {
+    width: 100%;
+  }
+}

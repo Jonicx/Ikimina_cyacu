@@ -21,6 +21,12 @@ import { Link } from "react-router-dom";
 import { SlidebarPages } from '../../../components/SidebarPages';
 
 export const TreeView = () => {
+  const print = () =>{
+    window.print();
+  }
+  const printTree = () =>{
+    window.print();
+  }
   const orgchart = useRef();
   const initialInputState = {
     firstName: "",
@@ -51,6 +57,7 @@ export const TreeView = () => {
   }, []);
 
   const handleClose = () => setShow(false);
+  const handleClose1 = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
@@ -76,7 +83,7 @@ export const TreeView = () => {
 
   return (
     <AppLayout>
-      <section className="home-slide">
+      <section className="home-slide no-printme">
         <Container>
           <Row>
             <SlidebarPages></SlidebarPages>
@@ -256,21 +263,23 @@ export const TreeView = () => {
             </Col>
           </Row>
           {/* Modal Preview */}
+
           <Modal
             show={modalShow}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
+            onHide={() => setModalShow(false)}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
+            keyboard={false}
+            backdrop="static"
             centered
+            className="printme"
           >
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body>
               <UserCard userData={afterRegister} />
             </Modal.Body>
             <Modal.Footer>
-              <Button>Print</Button>
+              <Button onClick={print} >Print</Button>
             </Modal.Footer>
           </Modal>
 

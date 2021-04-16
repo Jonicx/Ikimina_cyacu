@@ -49,3 +49,16 @@
 .id_card {
   width: 8em;
 }
+
+.printme {
+  display: none;
+}
+@media print {
+  .no-printme {
+    display: none;
+  }
+  .printme {
+    display: block;
+    width: 100%;
+  }
+}
