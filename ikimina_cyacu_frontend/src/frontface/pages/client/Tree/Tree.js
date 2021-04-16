@@ -59,7 +59,7 @@ export const TreeView = () => {
       .then((newMember) => {
         setIsLoading(false);
         setShow(false);
-        setAfterRegister(newMember.data.member);
+        setAfterRegister(newMember.data);
         setModalShow(true);
         loadMembers();
       })
