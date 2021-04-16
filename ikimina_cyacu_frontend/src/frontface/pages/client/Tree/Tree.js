@@ -13,12 +13,9 @@ import { Link } from "react-router-dom";
 import { SlidebarPages } from "../../../components/SidebarPages";
 
 export const TreeView = () => {
-  const print = () =>{
+  const print = () => {
     window.print();
-  }
-  const printTree = () =>{
-    window.print();
-  }
+  };
   const orgchart = useRef();
   const initialInputState = {
     firstName: "",
@@ -46,7 +43,6 @@ export const TreeView = () => {
   }, [rawMembers]);
 
   const handleClose = () => setShow(false);
-  const handleClose1 = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
@@ -63,7 +59,7 @@ export const TreeView = () => {
       .then((newMember) => {
         setIsLoading(false);
         setShow(false);
-        setAfterRegister(newMember.data.member);
+        setAfterRegister(newMember.data);
         setModalShow(true);
         loadMembers();
       })
@@ -275,7 +271,7 @@ export const TreeView = () => {
               <UserCard userData={afterRegister} />
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={print} >Print</Button>
+              <Button onClick={print}>Print</Button>
             </Modal.Footer>
           </Modal>
 
