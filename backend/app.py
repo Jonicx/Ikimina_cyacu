@@ -41,16 +41,22 @@ class AdminModel(db.Model):
     createdAt = db.Column(db.DateTime(), server_default=func.now())
     updatedAt = db.Column(db.DateTime(), onupdate=func.now())
     lastLogin = db.Column(db.DateTime(), nullable=True)
+    admin = db.relationship('LogsModel',backref='administrator')
 
 
-class AdminSchema(ma.Schema):
+class AdminSchema(ma.SQLAlchemySchema):
     class Meta:
-        fields = ('id', 'firstName', 'lastName', 'username', 'phoneNumber')
+        # fields = ('id', 'firstName', 'lastName', 'username', 'phoneNumber')
+        model = AdminModel
+        id = ma.auto_field()
+        firstName = ma.auto_field()
+        lastName = ma.auto_field()
+        username = ma.auto_field()
+        phoneNumber = ma.auto_field()
 
 
 adminSchema = AdminSchema()
 adminsSchema = AdminSchema(many=True)
-
 
 class MemberModel(db.Model):
     __tablename__ = 'Members'
@@ -79,24 +85,25 @@ membersSchema = MemberSchema(many=True)
 class LogsModel(db.Model):
     __tablename__ = 'Logs'
     id = db.Column(db.Integer, primary_key=True)
-    adminId = db.Column(db.String(10), db.ForeignKey("Administrators.id"))
-    admin = db.relationship('AdminModel')
+    adminId = db.Column(db.Integer, db.ForeignKey("Administrators.id"))
     activity = db.Column(db.Enum("AUTH", "ADD MEMBER", "UPDATE MEMBER"), nullable=False)
     details = db.Column(db.String(100), nullable=False)
     timestamp = db.Column(db.DateTime(), server_default=func.now())
 
 
-class LogSchema(ma.Schema):
+class LogSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        fields = ("details", "timestamp", "admin")
-        admin = ma.Nested(adminSchema)
+        # fields = ("activity","details", "timestamp", "admin")
+        model = LogsModel
+        include_fk = True
+        admin = ma.Nested(adminSchema,exclude=('lastLogin',))
 
 
 logSchema = LogSchema()
 logsSchema = LogSchema(many=True)
 
 
-# db.create_all()
+db.create_all()
 
 
 # Controllers
@@ -215,7 +222,7 @@ class RegisterMember(Resource):
                     db.session.commit()
 
                 return {"message": "Member has been Added successfully", "member": memberSchema.dump(newMember),
-                        "orienation": memberSchema.dump(parentMember)}, 200
+                        "orientation": memberSchema.dump(parentMember)}, 200
 
             else:
                 return {"message": f"Orientation with ID: {parentMember.memberId}, already has two members!"}
@@ -264,9 +271,9 @@ class GetLogs(Resource):
         if not now < decodedJWT['exp']:
             return {"message": "Token expired"}
         try:
-            # allLogs = LogsModel.query.all()
-            # result = logsSchema.dump(allLogs)
-            result = adminSchema.dump(AdminModel.query.filter_by(id="1").first())
+            allLogs = LogsModel.query.all()
+            result = logsSchema.dump(allLogs)
+            # result = adminSchema.dump(AdminModel.query.filter_by(id="1").first())
 
             return result, 200
 
