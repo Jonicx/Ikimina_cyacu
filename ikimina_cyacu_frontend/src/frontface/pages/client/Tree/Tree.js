@@ -77,8 +77,8 @@ export const TreeView = () => {
       <section className="home-slide no-printme">
         <Container>
           <Row>
-            <SlidebarPages></SlidebarPages>
-            <Col lg={10} className="WhitePanel_Home ">
+            {/* <SlidebarPages></SlidebarPages> */}
+            <Col lg={12} className="WhitePanel_Home ">
               <br />
               <Row class="justify-content-center">
                 <Col lg={4} md={4} sm={4}>
