@@ -15,7 +15,7 @@ class MemberService {
 
   register(firstName, lastName, parentMemberId, phoneNumber) {
     let data = JSON.stringify({
-      firstName: firstName,
+      firstName: firstName.toUpperCase(),
       lastName: lastName,
       parentMemberId: parentMemberId,
       phoneNumber: phoneNumber,
