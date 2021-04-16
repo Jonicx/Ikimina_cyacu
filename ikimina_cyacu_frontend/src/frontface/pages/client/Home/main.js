@@ -29,6 +29,7 @@ export const HomeView = () => {
                            <Image
                               src={WhyIkiminaCyacu}
                               alt='Why ikimina cyacu'
+                              className="Images"
                            />
 
                            <p
@@ -54,7 +55,7 @@ export const HomeView = () => {
 
                         <Col lg={4} md={4} sm={4} xs={12} className='mb-0'>
                            <div className=' shadow'>
-                              <Image src={itandukaniro} alt='Itandukaniro ryacu' />
+                              <Image src={itandukaniro} alt='Itandukaniro ryacu'  className="Images"/>
 
                               <p
                                  className='text-uppercase text-center pl-2 pr-2 mb-4'
@@ -85,6 +86,7 @@ export const HomeView = () => {
                            <Image
                               src={JoinUs}
                               alt='Joining us'
+                              className="Images"
                            />
 
                            <p

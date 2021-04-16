@@ -1,4 +1,4 @@
-import { Route, Switch, HashRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch, HashRouter } from "react-router-dom";
 import CustomRoute from "./app/utils/route";
 import RoutesName from "./app/routes";
 import { HomeView } from "./frontface/pages/client/Home/main";
@@ -48,7 +48,7 @@ const Routes = () => {
     //     />
     //   </Switch>
     // </Router>
-    <HashRouter>
+    <BrowserRouter>
       <Switch>
       <Route
        path={RoutesName.auth.login}
@@ -76,7 +76,7 @@ const Routes = () => {
       auth={true}
       access={true}/>
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
