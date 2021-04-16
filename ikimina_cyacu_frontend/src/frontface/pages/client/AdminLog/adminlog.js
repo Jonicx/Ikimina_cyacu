@@ -7,6 +7,7 @@ import { SlidebarPages } from "../../../components/SidebarPages";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 import LogService from "../../../../service/logs.service";
+const moment = require("moment");
 
 export const AdminLogView = () => {
   const [rawLogs, setRawLogs] = useState([]);
@@ -21,6 +22,7 @@ export const AdminLogView = () => {
       const logs = rawData.map((l) => ({
         ...l,
         adminId: "Admin",
+        timestamp: `${moment(l.timestamp).format("DD/MM/YYYY HH:mm A")}`,
       }));
       console.log(logs);
       setRawLogs(logs);
