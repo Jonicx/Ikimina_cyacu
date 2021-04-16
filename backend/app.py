@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_restful import Api, Resource, abort, reqparse
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -45,7 +45,7 @@ class AdminModel(db.Model):
 
 class AdminSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'firstName', 'lastName', 'username', 'phoneNumber', 'lastLogin')
+        fields = ('id', 'firstName', 'lastName', 'username', 'phoneNumber')
 
 
 adminSchema = AdminSchema()
@@ -79,15 +79,17 @@ membersSchema = MemberSchema(many=True)
 class LogsModel(db.Model):
     __tablename__ = 'Logs'
     id = db.Column(db.Integer, primary_key=True)
-    adminId = db.Column(db.String(10))
-    activity = db.Column(db.Enum("AUTH", "CREATE", "UPDATE"), nullable=False)
+    adminId = db.Column(db.String(10), db.ForeignKey("Administrators.id"))
+    admin = db.relationship('AdminModel')
+    activity = db.Column(db.Enum("AUTH", "ADD MEMBER", "UPDATE MEMBER"), nullable=False)
     details = db.Column(db.String(100), nullable=False)
     timestamp = db.Column(db.DateTime(), server_default=func.now())
 
 
 class LogSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'adminId', 'activity', 'details', 'timestamp')
+        fields = ("details", "timestamp", "admin")
+        admin = ma.Nested(adminSchema)
 
 
 logSchema = LogSchema()
@@ -149,9 +151,11 @@ class LoginAdmin(Resource):
                     activity="AUTH",
                     details=f"Login via IP: {args['ip']}"
                 )
+                db.session.commit()
                 db.session.add(recordLog)
                 db.session.commit()
             except IntegrityError:
+                
                 db.session.rollback()
                 return {"message": "Can't login, Database log record error"}, 500
 
@@ -160,6 +164,7 @@ class LoginAdmin(Resource):
                     "username": exists.username,
                     "firstName": exists.firstName,
                     "lastName": exists.lastName,
+                    "lastLogin": str(datetime.datetime.now()),
                     "email": exists.email,
                     'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),
                     'iat': datetime.datetime.utcnow(), }), "secret", algorithm="HS256")
@@ -244,10 +249,37 @@ class GetMembers(Resource):
             return {"message": f"Member registration failed!"}, 400
 
 
+class GetLogs(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('token', location='headers', required=True, help="Token cannot be blank!")
+        args = parser.parse_args()
+
+        decodedJWT = jwt.decode(args['token'], "secret", algorithms=["HS256"])
+        exists = AdminModel.query.filter_by(username=decodedJWT['username']).first()
+
+        if not exists:
+            return {"message": "Token invalid"}
+        now = datetime.datetime.now().timestamp()
+        if not now < decodedJWT['exp']:
+            return {"message": "Token expired"}
+        try:
+            # allLogs = LogsModel.query.all()
+            # result = logsSchema.dump(allLogs)
+            result = adminSchema.dump(AdminModel.query.filter_by(id="1").first())
+
+            return result, 200
+
+        except IntegrityError:
+            db.session.rollback()
+            return {"message": f"Member registration failed!"}, 400
+
+
 api.add_resource(RegisterAdmin, "/auth/admin/register")
 api.add_resource(LoginAdmin, "/auth/admin/login")
 api.add_resource(RegisterMember, "/member/add")
 api.add_resource(GetMembers, "/member/get")
+api.add_resource(GetLogs, "/logs/get")
 
 # Init Server
 
