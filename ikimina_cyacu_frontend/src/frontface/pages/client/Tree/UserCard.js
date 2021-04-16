@@ -15,7 +15,7 @@ export default class UserCard extends React.PureComponent {
             </ListGroup.Item>
             <ListGroup.Item>
               <strong>Names:</strong> {this.props.userData.member.firstName}{" "}
-              {this.props.userData.lastName}
+              {this.props.userData.member.lastName}
             </ListGroup.Item>
             <ListGroup.Item>
               <strong>Telephone:</strong> +25{this.props.userData.member.phoneNumber}
