@@ -1,4 +1,6 @@
 import { Col } from "react-bootstrap";
+import jwt_decode from "jwt-decode";
+import moment from "moment";
 import Adminicon from "../../../../src/assets/icons8_school_director_48.png";
 import HomeIcon from "../../../../src/assets/home_16pxn.png";
 import GridIcon from "../../../../src/assets/grid_16px.png";
@@ -11,6 +13,7 @@ import "./index.css";
 import AuthService from "../../../service/auth.service";
 
 export const SlideBar = () => {
+  const currentUser = jwt_decode(localStorage.getItem("token"));
   const handleLogout = () => {
     AuthService.logout();
   };
@@ -63,11 +66,15 @@ export const SlideBar = () => {
             to={reverse(RoutesName.pages.adminLog)}
             className="text-left text-bold text-center white"
           >
-            <p>Last LogOut: 18:00 11th/3/2020</p>
+            <p style={{ fontSize: "12px" }}>
+              Last login:
+              {`${moment(currentUser.lastLogin).format("DD/MM/YYYY hh:mm A")}`}{" "}
+            </p>
           </Link>
 
           <p className="text-left text-bold text-center">
-            <a href
+            <a
+              href
               onClick={handleLogout}
               className="btn btn-outline-default text-center text-bold py-0 mt-3"
             >
