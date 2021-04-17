@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch, HashRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CustomRoute from "./app/utils/route";
 import RoutesName from "./app/routes";
 import { HomeView } from "./frontface/pages/client/Home/main";
@@ -50,31 +50,36 @@ const Routes = () => {
     // </Router>
     <BrowserRouter>
       <Switch>
-      <Route
-       path={RoutesName.auth.login}
-       component={ LoginView } 
-       auth={false}
-       access={false}/>
-      <CustomRoute 
-      path={RoutesName.pages.adminLog}
-      component={ AdminLogView } 
-      auth={true}
-      access={true}/>
-      <Route 
-      path={RoutesName.pages.register}
-      component={ RegistrationView } 
-      auth={true}
-      access={true}/>
-      <CustomRoute 
-      path={RoutesName.pages.members}
-      component={ TreeView }
-      auth={true}
-      access={true}/>
-      <CustomRoute 
-      path={RoutesName.home}
-      component={ HomeView } 
-      auth={true}
-      access={true}/>
+        <Route
+          path={RoutesName.auth.login}
+          component={LoginView}
+          auth={false}
+          access={false}
+        />
+        <CustomRoute
+          path={RoutesName.pages.adminLog}
+          component={AdminLogView}
+          auth={true}
+          access={true}
+        />
+        <Route
+          path={RoutesName.pages.register}
+          component={RegistrationView}
+          auth={true}
+          access={true}
+        />
+        <CustomRoute
+          path={RoutesName.pages.members}
+          component={TreeView}
+          auth={true}
+          access={true}
+        />
+        <CustomRoute
+          path={RoutesName.home}
+          component={HomeView}
+          auth={true}
+          access={true}
+        />
       </Switch>
     </BrowserRouter>
   );
