@@ -9,7 +9,6 @@ import AppLayout from "../../../layouts/AppLayout";
 import MemberService from "../../../../service/members.service";
 import UtilServices from "../../../../service/util.service";
 import { Link } from "react-router-dom";
-import { SlidebarPages } from "../../../components/SidebarPages";
 import { reverse } from "named-urls";
 import RoutesName from "../../../../app/routes";
 
@@ -41,7 +40,7 @@ export const TreeView = () => {
 
   useEffect(() => {
     loadMembers();
-  }, [rawMembers]);
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -50,8 +49,12 @@ export const TreeView = () => {
   };
   const handleSearch = (e) => {
     const { searchQuery } = eachEntry;
-    console.log(searchQuery);
-    setRawMembers((prevState) => ({ ...prevState }));
+    MemberService.searchMember(searchQuery)
+      .then((res) => {
+        const [processedData] = UtilServices.processData(res.data);
+        setRawMembers(processedData);
+      })
+      .catch((err) => console.error(err, err));
   };
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -83,9 +86,7 @@ export const TreeView = () => {
               <Row class="justify-content-center">
                 <Col lg={4} md={4} sm={4}>
                   <p className="mt-2 mb-0 title text-capitalize text-bold">
-                    <Link
-                      to={reverse(RoutesName.home)}
-                    >
+                    <Link to={reverse(RoutesName.home)}>
                       &nbsp;&nbsp; | Membership Tree
                     </Link>
                   </p>
@@ -127,8 +128,7 @@ export const TreeView = () => {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
                       className=" mt-0 mb-0 title text-capitalize "
                       type="submit"
