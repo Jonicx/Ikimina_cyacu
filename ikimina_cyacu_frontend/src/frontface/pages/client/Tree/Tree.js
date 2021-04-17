@@ -4,13 +4,14 @@ import printIcon from "../../../../assets/print_32px.png";
 import OrganizationChart from "@dabeng/react-orgchart";
 import UserCard from "./UserCard";
 import MemberNode from "./MemberNode";
-
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
 import MemberService from "../../../../service/members.service";
 import UtilServices from "../../../../service/util.service";
 import { Link } from "react-router-dom";
 import { SlidebarPages } from "../../../components/SidebarPages";
+import { reverse } from "named-urls";
+import RoutesName from "../../../../app/routes";
 
 export const TreeView = () => {
   const print = () => {
@@ -74,16 +75,19 @@ export const TreeView = () => {
 
   return (
     <AppLayout>
-      <section className="home-slide no-printme">
+      <section className="tree-slide no-printme">
         <Container>
           <Row>
-            {/* <SlidebarPages></SlidebarPages> */}
             <Col lg={12} className="WhitePanel_Home ">
               <br />
               <Row class="justify-content-center">
                 <Col lg={4} md={4} sm={4}>
                   <p className="mt-2 mb-0 title text-capitalize text-bold">
-                    &nbsp;&nbsp; | Membership Tree
+                    <Link
+                      to={reverse(RoutesName.home)}
+                    >
+                      &nbsp;&nbsp; | Membership Tree
+                    </Link>
                   </p>
                 </Col>
                 <Col lg={4} md={4} sm={4}>
@@ -122,6 +126,9 @@ export const TreeView = () => {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
                       className=" mt-0 mb-0 title text-capitalize "
                       type="submit"
@@ -131,7 +138,7 @@ export const TreeView = () => {
                       Register
                     </Button>
                     <Link className="">
-                      &nbsp;&nbsp;
+                      &nbsp;
                       <img src={printIcon} alt="Print all" onClick={exportTo} />
                     </Link>
                   </Row>
