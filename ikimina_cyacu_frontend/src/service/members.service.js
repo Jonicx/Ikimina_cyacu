@@ -52,7 +52,7 @@ class MemberService {
 
   getMemberById(id) {
     var data = JSON.stringify({
-      query: id,
+      id: id,
     });
 
     var config = {
