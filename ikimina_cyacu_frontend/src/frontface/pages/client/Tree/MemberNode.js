@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import MemberService from "../../../../service/members.service";
+import dropdown from "../../../../assets/drop_down_16px.png"
 
 import "./index.css";
 const moment = require("moment");
@@ -26,10 +27,15 @@ const MemberNode = ({ nodeData }) => {
       {nodeData ? (
         <div onClick={handleShow}>
           <div className={nodeData.level === 0 ? "red" : "green"}>{}</div>
-          <div className="white">
-            {/* TODO: view button  */}
-            <strong id="code"> {nodeData.memberId}</strong>
-            <br />
+          <Col className="white">
+            <Row className="mb-1">
+              <Col>
+              <strong id="code"> {nodeData.memberId}</strong>
+              </Col>
+              <Col>
+              <img src={dropdown} alt=""/>
+              </Col>
+            </Row>
             <p>
               {`${
                 nodeData.firstName
@@ -44,7 +50,7 @@ const MemberNode = ({ nodeData }) => {
             </p>
 
             <br />
-          </div>
+          </Col>
         </div>
       ) : (
         <div>Loading ...</div>
