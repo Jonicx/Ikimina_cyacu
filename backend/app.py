@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy.sql import func
+from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 from hashids import Hashids
@@ -41,7 +42,7 @@ class AdminModel(db.Model):
     createdAt = db.Column(db.DateTime(), server_default=func.now())
     updatedAt = db.Column(db.DateTime(), onupdate=func.now())
     lastLogin = db.Column(db.DateTime(), nullable=True)
-    admin = db.relationship('LogsModel',backref='administrator')
+    admin = db.relationship('LogsModel', backref='administrator')
 
 
 class AdminSchema(ma.SQLAlchemySchema):
@@ -57,6 +58,7 @@ class AdminSchema(ma.SQLAlchemySchema):
 
 adminSchema = AdminSchema()
 adminsSchema = AdminSchema(many=True)
+
 
 class MemberModel(db.Model):
     __tablename__ = 'Members'
@@ -96,15 +98,14 @@ class LogSchema(ma.SQLAlchemyAutoSchema):
         # fields = ("activity","details", "timestamp", "admin")
         model = LogsModel
         include_fk = True
-        admin = ma.Nested(adminSchema,exclude=('lastLogin',))
+        admin = ma.Nested(adminSchema, exclude=('lastLogin',))
 
 
 logSchema = LogSchema()
 logsSchema = LogSchema(many=True)
 
 
-db.create_all()
-
+# db.create_all()
 
 # Controllers
 class RegisterAdmin(Resource):
@@ -162,7 +163,7 @@ class LoginAdmin(Resource):
                 db.session.add(recordLog)
                 db.session.commit()
             except IntegrityError:
-                
+
                 db.session.rollback()
                 return {"message": "Can't login, Database log record error"}, 500
 
@@ -255,6 +256,32 @@ class GetMembers(Resource):
             db.session.rollback()
             return {"message": f"Member registration failed!"}, 400
 
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('token', location='headers', required=True, help="Token cannot be blank!")
+        parser.add_argument('id', type=int, required=True, help="ID name cannot be blank!")
+        args = parser.parse_args()
+
+        decodedJWT = jwt.decode(args['token'], "secret", algorithms=["HS256"])
+        exists = AdminModel.query.filter_by(username=decodedJWT['username']).first()
+        if not exists:
+            return {"message": "Token invalid"}
+        now = datetime.datetime.now().timestamp()
+        if not now < decodedJWT['exp']:
+            return {"message": "Token expired"}
+        try:
+            member = MemberModel.query.filter_by(id=args['id']).first()
+
+            memberOrientation = MemberModel.query.filter_by(memberId=member.parentMemberId).first()
+
+            result = {"member": memberSchema.dump(member), "orientation": memberSchema.dump(memberOrientation)}
+
+            return result, 200
+
+        except IntegrityError:
+            db.session.rollback()
+            return {"message": f"Member registration failed!"}, 400
+
 
 class GetLogs(Resource):
     def get(self):
@@ -282,13 +309,38 @@ class GetLogs(Resource):
             return {"message": f"Member registration failed!"}, 400
 
 
+class SearchMember(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('token', location='headers', required=True, help="Token cannot be blank!")
+        parser.add_argument('query', type=str, required=True, help="No thing to search!")
+        args = parser.parse_args()
+
+        decodedJWT = jwt.decode(args['token'], "secret", algorithms=["HS256"])
+        exists = AdminModel.query.filter_by(username=decodedJWT['username']).first()
+        if not exists:
+            return {"message": "Token invalid"}
+        now = datetime.datetime.now().timestamp()
+        if not now < decodedJWT['exp']:
+            return {"message": "Token expired"}
+        try:
+            searchMembers = MemberModel.query.filter(
+                or_(MemberModel.phoneNumber.like(args["query"]), MemberModel.memberId.contains(args["query"]), ))
+            result = membersSchema.dump(searchMembers)
+            return result, 200
+
+        except IntegrityError:
+            db.session.rollback()
+            return {"message": f"Member registration failed!"}, 400
+
+
 api.add_resource(RegisterAdmin, "/auth/admin/register")
 api.add_resource(LoginAdmin, "/auth/admin/login")
 api.add_resource(RegisterMember, "/member/add")
 api.add_resource(GetMembers, "/member/get")
+api.add_resource(SearchMember, "/member/search")
 api.add_resource(GetLogs, "/logs/get")
 
 # Init Server
-
 if __name__ == '__main__':
     app.run(debug=True)
