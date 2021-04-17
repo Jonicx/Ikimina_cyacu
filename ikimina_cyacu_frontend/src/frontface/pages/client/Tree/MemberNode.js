@@ -18,7 +18,7 @@ const MemberNode = ({ nodeData }) => {
     // MemberService.getMemberById(id).then((res) => {
     //   console.log(res.data);
     // });
-    console.log(e);
+    console.log(id);
     setShow(true);
   };
   return (
