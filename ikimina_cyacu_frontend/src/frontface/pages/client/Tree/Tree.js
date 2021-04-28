@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Form, Button, Spinner, Modal } from "react-bootstrap";
+import { Row, Col, Form, Button, Spinner, Modal } from "react-bootstrap";
 import printIcon from "../../../../assets/print_32px.png";
 import OrganizationChart from "@dabeng/react-orgchart";
 import UserCard from "./UserCard";
@@ -11,6 +11,8 @@ import UtilServices from "../../../../service/util.service";
 import { Link } from "react-router-dom";
 import { reverse } from "named-urls";
 import RoutesName from "../../../../app/routes";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 export const TreeView = () => {
   const print = () => {
@@ -44,9 +46,15 @@ export const TreeView = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
+    console.log(setEachEntry)
   };
+  const handlePhoneChange = (value, data, e, formattedValue) => {
+    setEachEntry({rawPhone: value.slice(data.dialCode.length) })
+    console.log(setEachEntry)
+  }
   const handleSearch = (e) => {
     const { searchQuery } = eachEntry;
     MemberService.searchMember(searchQuery)
@@ -79,21 +87,22 @@ export const TreeView = () => {
   return (
     <AppLayout>
       <section className="tree-slide no-printme">
-        <Container>
+        <>
           <Row>
-            <Col lg={12} className="WhitePanel_Home ">
+            <Col lg={12} className="">
               <br />
               <Row class="justify-content-center">
                 <Col lg={4} md={4} sm={4}>
-                  <p className="mt-2 mb-0 title text-capitalize text-bold">
+                  <p className="mt-2 ml-5 mb-0 title text-capitalize text-bold">
                     <Link to={reverse(RoutesName.home)}>
-                      &nbsp;&nbsp; | Membership Tree
+                       | Membership Tree
                     </Link>
                   </p>
                 </Col>
                 <Col lg={4} md={4} sm={4}>
                   <Row class="justify-content-center">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Form class="mt-0">
                       <div class=" row no-gutters mb-1">
                         <div className="col">
@@ -128,7 +137,9 @@ export const TreeView = () => {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
                       className=" mt-0 mb-0 title text-capitalize "
                       type="submit"
@@ -184,13 +195,34 @@ export const TreeView = () => {
                             />
                           </Col>
                           <Col lg={12} xs={12} className="mt-2">
-                            <Form.Control
+                            {/* <Form.Control
                               type="number"
                               id="tel"
                               name="phoneNumber"
                               onChange={handleInputChange}
                               disabled={isLoading}
                               placeholder="Telephone"
+                            /> */}
+                            <PhoneInput
+                              placeholder='Telephone'
+                              id='tel'
+                              name="phoneNumber"
+                              type='number'
+                              onChange={handlePhoneChange}
+                              disabled={isLoading}
+                              containerClass="my-container-class"
+                              inputClass="my-input-class"
+                              containerStyle={{
+                                border: "1px",
+                                width: "100%"
+                              }}
+                              inputStyle={{
+                                width: "100%"
+                              }}
+                              enableSearch={true}
+                              disableSearchIcon={true}
+                              countryCodeEditable={false}
+                              enableTerritories={true}
                             />
                           </Col>
                           <Col lg={12} xs={12} className="mt-2">
@@ -246,19 +278,20 @@ export const TreeView = () => {
                   </Modal.Body>
                 </Modal>
               </Row>
-              <p className="border-bottom mt-0"></p>
-              <Row>
-                <Col lg={12} className="mb-3">
+              {/* <p className="border-bottom mt-2 mb-0"></p> */}
+              <>
+                <div className="mb-4 chart_width" >
                   <OrganizationChart
                     ref={orgchart}
                     datasource={rawMembers}
                     chartClass="myChart"
                     zoom={true}
                     pan={true}
+                    zoomoutLimit={0.2}
                     NodeTemplate={MemberNode}
                   />
-                </Col>
-              </Row>
+                </div>
+              </>
             </Col>
           </Row>
           {/* Modal Preview */}
@@ -283,7 +316,7 @@ export const TreeView = () => {
           </Modal>
 
           {/* End of Modal Preview */}
-        </Container>
+        </>
       </section>
     </AppLayout>
   );

@@ -27,7 +27,6 @@ export const LoginView = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log("you clicked new2");
     getClientIp().then((ip) => {
       const { username, password } = eachEntry;
       setIsLoading(true);

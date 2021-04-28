@@ -71,7 +71,7 @@ const Routes = () => {
         <CustomRoute
           path={RoutesName.pages.members}
           component={TreeView}
-          auth={true}
+          auth={false}
           access={true}
         />
         <CustomRoute
