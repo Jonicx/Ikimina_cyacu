@@ -11,7 +11,6 @@ import UtilServices from "../../../../service/util.service";
 import { Link } from "react-router-dom";
 import { reverse } from "named-urls";
 import RoutesName from "../../../../app/routes";
-import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
 export const TreeView = () => {
@@ -49,12 +48,7 @@ export const TreeView = () => {
 
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
-    console.log(setEachEntry)
   };
-  const handlePhoneChange = (value, data, e, formattedValue) => {
-    setEachEntry({rawPhone: value.slice(data.dialCode.length) })
-    console.log(setEachEntry)
-  }
   const handleSearch = (e) => {
     const { searchQuery } = eachEntry;
     MemberService.searchMember(searchQuery)
@@ -77,6 +71,7 @@ export const TreeView = () => {
       })
       .catch((err) => {
         console.log(err);
+        console.log(firstName);
       });
   };
   const exportTo = () => {
@@ -91,7 +86,7 @@ export const TreeView = () => {
           <Row>
             <Col lg={12} className="">
               <br />
-              <Row class="justify-content-center">
+              <Row className="justify-content-center">
                 <Col lg={4} md={4} sm={4}>
                   <p className="mt-2 ml-5 mb-0 title text-capitalize text-bold">
                     <Link to={reverse(RoutesName.home)}>
@@ -100,11 +95,10 @@ export const TreeView = () => {
                   </p>
                 </Col>
                 <Col lg={4} md={4} sm={4}>
-                  <Row class="justify-content-center">
+                  <Row className="justify-content-center">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Form class="mt-0">
-                      <div class=" row no-gutters mb-1">
+                    <Form className="mt-0">
+                      <div className=" row no-gutters mb-1">
                         <div className="col">
                           <Form.Control
                             type="search"
@@ -115,7 +109,7 @@ export const TreeView = () => {
                             style={{ textAlign: "center", fontSize: "13px" }}
                           />
                         </div>
-                        <div class="col-auto">
+                        <div className="col-auto">
                           <Button
                             className=" mt-0 mb-0 title text-capitalize "
                             type="button"
@@ -139,7 +133,7 @@ export const TreeView = () => {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
                       className=" mt-0 mb-0 title text-capitalize "
                       type="submit"
@@ -195,34 +189,13 @@ export const TreeView = () => {
                             />
                           </Col>
                           <Col lg={12} xs={12} className="mt-2">
-                            {/* <Form.Control
+                            <Form.Control
                               type="number"
                               id="tel"
                               name="phoneNumber"
                               onChange={handleInputChange}
                               disabled={isLoading}
                               placeholder="Telephone"
-                            /> */}
-                            <PhoneInput
-                              placeholder='Telephone'
-                              id='tel'
-                              name="phoneNumber"
-                              type='number'
-                              onChange={handlePhoneChange}
-                              disabled={isLoading}
-                              containerClass="my-container-class"
-                              inputClass="my-input-class"
-                              containerStyle={{
-                                border: "1px",
-                                width: "100%"
-                              }}
-                              inputStyle={{
-                                width: "100%"
-                              }}
-                              enableSearch={true}
-                              disableSearchIcon={true}
-                              countryCodeEditable={false}
-                              enableTerritories={true}
                             />
                           </Col>
                           <Col lg={12} xs={12} className="mt-2">

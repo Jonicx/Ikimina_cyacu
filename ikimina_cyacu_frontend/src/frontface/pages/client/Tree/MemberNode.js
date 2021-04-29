@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import MemberService from "../../../../service/members.service";
 import dropdown from "../../../../assets/drop_down_16px.png";
 import "./index.css";
-import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import printIcon from "../../../../assets/print_28px.png"
 const moment = require("moment");
 
 const propTypes = {
@@ -17,6 +17,9 @@ function MemberNode  ( {nodeData},props ) {
     firstName: "",
     lastName: "",
     phoneNumber: "",
+  };
+  const print = () => {
+    window.print();
   };
   const [show, setShow] = useState(false);
   const [currentMember, setCurrentMember] = useState({});
@@ -43,11 +46,6 @@ function MemberNode  ( {nodeData},props ) {
     setShow(true);
     console.log(currentMember);
   };
-
-  const handlePhoneChange = (value, data, e, formattedValue) => {
-    setEachEntry({rawPhone: value.slice(data.dialCode.length) })
-    console.log(setEachEntry)
-  }
 
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
@@ -87,13 +85,20 @@ function MemberNode  ( {nodeData},props ) {
         <div>Loading ...</div>
       )}
       <Container>
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} className="printme">
           <Row>
             <Col xs={12}>
               <ListGroup variant="flush">
                 <ListGroup.Item variant="primary">
-                  <strong>ID:</strong>{" "}
-                  {currentMember.member ? currentMember.member.memberId : ""}
+                  <Row>
+                    <Col lg={10}>
+                      <strong>ID:</strong>{" "}
+                      {currentMember.member ? currentMember.member.memberId : ""}
+                    </Col>
+                    <Col lg={2}>
+                      <img src={printIcon} alt="Print all" onClick={print}/>
+                    </Col>
+                  </Row>
                 </ListGroup.Item>
                 <div id="count1">
                 {count < components.length - 1 && <>
@@ -143,27 +148,13 @@ function MemberNode  ( {nodeData},props ) {
                       </Form.Row>
                       <Form.Row>
                         <Col lg={6} xs={12} className='mt-2'>
-                        <PhoneInput
-                              placeholder='Telephone'
-                              id='tel'
-                              name="phoneNumber"
-                              type='number'
-                              onChange={handlePhoneChange}
-                              containerClass="my-container-class"
-                              inputClass="my-input-class"
-                              containerStyle={{
-                                border: "1px",
-                                width: "100%"
-                              }}
-                              inputStyle={{
-                                width: "100%"
-
-                              }}
-                              enableSearch={true}
-                              disableSearchIcon={true}
-                              countryCodeEditable={false}
-                              enableTerritories={true}
-                            />
+                          <Form.Control
+                            type="number"
+                            id="tel"
+                            name="phoneNumber"
+                            onChange={handleInputChange}
+                            placeholder={currentMember.member ? currentMember.member.phoneNumber : ""}
+                          />
                         </Col>
                         <Col lg={6} xs={12} className='mt-2'>
                           <Row>

@@ -29,7 +29,7 @@ class MemberService {
       },
       data: data,
     };
-    return axios(config);
+    return axios(config)
   }
 
   searchMember(queryStr) {
