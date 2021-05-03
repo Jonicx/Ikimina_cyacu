@@ -1,9 +1,15 @@
-export default function authHeader() {
-  const token = JSON.parse(localStorage.getItem("token"));
+import jwt_decode from "jwt-decode";
 
-  if (token) {
-    return { token: token };
-  } else {
-    return {};
+const authHeader = () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return true;
   }
-}
+  if (jwt_decode(token).exp < Date.now() / 1000) {
+    localStorage.clear();
+    return true;
+  }
+  return false;
+};
+
+export default authHeader;
