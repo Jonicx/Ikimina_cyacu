@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Form, Button, Modal, Col, Row, ListGroup, Container } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Modal,
+  Col,
+  Row,
+  ListGroup,
+  Container,
+  Spinner,
+} from "react-bootstrap";
 import PropTypes from "prop-types";
 import MemberService from "../../../../service/members.service";
 import dropdown from "../../../../assets/drop_down_16px.png";
@@ -13,7 +22,7 @@ const propTypes = {
   nodeData: PropTypes.object.isRequired,
 };
 
-function MemberNode  ( {nodeData},props ) {
+function MemberNode({ nodeData }, props) {
   const initialInputState = {
     firstName: "",
     lastName: "",
@@ -23,34 +32,48 @@ function MemberNode  ( {nodeData},props ) {
     window.print();
   };
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [currentMember, setCurrentMember] = useState({});
-  
+
   const handleClose = () => setShow(false);
   const [count, setCount] = React.useState(0);
   const [eachEntry, setEachEntry] = useState(initialInputState);
 
   const components = [
     document.getElementById("count1"),
-    document.getElementById("count2Update")
-  ]
-
+    document.getElementById("count2Update"),
+  ];
 
   const fetchCurrentMember = (id) => {
     MemberService.getMemberById(id).then((res) => {
       setCurrentMember(res.data);
     });
   };
-  
+  const handleEditSubmit = (e) => {
+    setIsLoading(true);
+    const memberId = currentMember.member.memberId;
+    const { firstName, lastName, phoneNumber } = eachEntry;
+    MemberService.editMember(firstName, lastName, memberId, phoneNumber)
+      .then((editedMember) => {
+        setIsLoading(false);
+        setShow(false);
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err.message);
+        setIsLoading(false);
+        setShow(false);
+      });
+  };
 
   const handleShow = (id) => {
     fetchCurrentMember(id);
     setShow(true);
-    console.log(currentMember);
   };
 
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
-    console.log(setEachEntry)
   };
   return (
     <section>
@@ -220,6 +243,113 @@ function MemberNode  ( {nodeData},props ) {
                 <ListGroup.Item variant="dark">
                   Telephone:&nbsp;
                   {currentMember.member ? currentMember.orientation.phoneNumber : ""}
+                <ListGroup.Item variant="primary">
+                  <Row>
+                    <Col lg={10}>
+                      <strong>ID:</strong>{" "}
+                      {currentMember.member ? currentMember.member.memberId : ""}
+                    </Col>
+                    <Col lg={2}>
+                      <img src={printIcon} alt="Print all" onClick={print} />
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+                <div id="count1">
+                  {count < components.length - 1 && (
+                    <>
+                      <ListGroup.Item>
+                        <strong>Names:</strong>{" "}
+                        {currentMember.member ? currentMember.member.firstName : ""}&nbsp;
+                        {currentMember.member ? currentMember.member.lastName : ""}
+                      </ListGroup.Item>
+                      <Row>
+                        <Col lg={9}>
+                          <ListGroup.Item>
+                            <strong>Telephone:</strong>&nbsp;
+                            {currentMember.member ? currentMember.member.phoneNumber : ""}
+                          </ListGroup.Item>
+                        </Col>
+                        <Col lg={2}>
+                          <Button
+                            variant="danger"
+                            onClick={() => setCount(count + 1)}
+                            className="mt-2 px-4"
+                          >
+                            Edit
+                          </Button>
+                        </Col>
+                      </Row>
+                    </>
+                  )}
+                </div>
+                <div id="count2Update">
+                  {count > 0 && (
+                    <>
+                      <Row>
+                        <Col>
+                          <Form className="p-4">
+                            <Form.Row>
+                              <Col lg={6} xs={12} className="mt-2">
+                                <Form.Control
+                                  type="text"
+                                  id="fname"
+                                  name="firstName"
+                                  placeholder={
+                                    currentMember.member
+                                      ? currentMember.member.firstName
+                                      : ""
+                                  }
+                                  autoFocus={true}
+                                  onChange={handleInputChange}
+                                />
+                              </Col>
+                              <Col lg={6} xs={12} className="mt-2">
+                                <Form.Control
+                                  type="text"
+                                  id="sname"
+                                  name="lastName"
+                                  placeholder={
+                                    currentMember.member
+                                      ? currentMember.member.lastName
+                                      : ""
+                                  }
+                                  onChange={handleInputChange}
+                                />
+                              </Col>
+                            </Form.Row>
+                            <Form.Row>
+                              <Col lg={6} xs={12} className="mt-2">
+                                <Form.Control
+                                  type="number"
+                                  id="tel"
+                                  name="phoneNumber"
+                                  onChange={handleInputChange}
+                                  placeholder={
+                                    currentMember.member
+                                      ? currentMember.member.phoneNumber
+                                      : ""
+                                  }
+                                />
+                              </Col>
+                              <Col lg={6} xs={12} className="mt-2">
+                                <Row>
+                                  <Col lg={3} xs={3}>
+                                    <Button
+                                      onClick={() => {
+                                        setCount(count - 1);
+                                        setIsLoading(false);
+                                      }}
+                                      className="ml-1 px-4"
+                                      variant="dark"
+                                    >
+                                      Cancel
+                                    </Button>
+                                  </Col>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <Col lg={3} xs={3}>
+                                    {!isLoading ? (
+                                      <Button
+                                        variant="primary"
                 </ListGroup.Item>
               </ListGroup>
             </ListGroup.Item>
@@ -240,7 +370,7 @@ function MemberNode  ( {nodeData},props ) {
       </Container>
     </section>
   );
-};
+}
 
-MemberNode.propTypes = propTypes
-export default MemberNode; 
+MemberNode.propTypes = propTypes;
+export default MemberNode;

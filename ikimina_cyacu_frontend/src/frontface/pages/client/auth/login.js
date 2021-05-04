@@ -4,9 +4,10 @@ import { Container, Form, Row, Col, Button, Alert, Spinner } from "react-bootstr
 import "./index.css";
 import AppLayout from "../../../layouts/AppLayout";
 import AuthService from "../../../../service/auth.service";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { reverse } from "named-urls";
 import RoutesName from "../../../../app/routes";
+import authHeader from "../../../../service/auth-header";
 
 export const LoginView = () => {
   const initialInputState = { username: "", password: "" };
@@ -16,6 +17,8 @@ export const LoginView = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const history = useHistory();
+  const isAuth = authHeader();
 
   const getClientIp = async () =>
     await publicIp.v4({
@@ -32,7 +35,7 @@ export const LoginView = () => {
       setIsLoading(true);
       AuthService.login(username, password, ip).then(
         () => {
-          window.location.reload();
+          history.push("/");
         },
         (error) => {
           const resMessage =
@@ -47,7 +50,7 @@ export const LoginView = () => {
     });
   };
 
-  return (
+  return isAuth ? (
     <AppLayout>
       <section className="Login-slide">
         <Container>
@@ -84,32 +87,32 @@ export const LoginView = () => {
                   />
                 </Form.Group>
                 <Link to={reverse(RoutesName.home)}>
-                {!isLoading ? (
-                  <Button
-                    variant="primary"
-                    className="btn-block mt-4 py-2 px-4 text-bold"
-                    style={{ fontSize: "14px" }}
-                    onClick={handleSubmit}
-                  >
-                    <>Login</>
-                  </Button>
-                ) : (
-                  <Button
-                    variant="primary"
-                    className="btn-block mt-4 py-2 px-4 text-bold"
-                    style={{ fontSize: "14px" }}
-                    onClick={handleSubmit}
-                  >
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">Loading...</span>
-                  </Button>
-                )}
+                  {!isLoading ? (
+                    <Button
+                      variant="primary"
+                      className="btn-block mt-4 py-2 px-4 text-bold"
+                      style={{ fontSize: "14px" }}
+                      onClick={handleSubmit}
+                    >
+                      <>Login</>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      className="btn-block mt-4 py-2 px-4 text-bold"
+                      style={{ fontSize: "14px" }}
+                      onClick={handleSubmit}
+                    >
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                      <span className="sr-only">Loading...</span>
+                    </Button>
+                  )}
                 </Link>
               </Form>
               <br />
@@ -128,5 +131,7 @@ export const LoginView = () => {
         </Container>
       </section>
     </AppLayout>
+  ) : (
+    <Redirect to="/" />
   );
 };
