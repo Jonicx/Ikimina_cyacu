@@ -75,7 +75,6 @@ function MemberNode({ nodeData }, props) {
 
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
-    console.log(setEachEntry);
   };
   return (
     <section>
@@ -207,7 +206,10 @@ function MemberNode({ nodeData }, props) {
                                 <Row>
                                   <Col lg={3} xs={3}>
                                     <Button
-                                      onClick={() => setCount(count - 1)}
+                                      onClick={() => {
+                                        setCount(count - 1);
+                                        setIsLoading(false);
+                                      }}
                                       className="ml-1 px-4"
                                       variant="dark"
                                     >
