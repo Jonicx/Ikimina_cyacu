@@ -35,7 +35,6 @@ export const LoginView = () => {
       setIsLoading(true);
       AuthService.login(username, password, ip).then(
         () => {
-          // window.location.reload();
           history.push("/");
         },
         (error) => {
