@@ -60,7 +60,6 @@ function MemberNode({ nodeData }, props) {
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
         alert(err.message);
         setIsLoading(false);
         setShow(false);
@@ -70,7 +69,6 @@ function MemberNode({ nodeData }, props) {
   const handleShow = (id) => {
     fetchCurrentMember(id);
     setShow(true);
-    console.log(currentMember);
   };
 
   const handleInputChange = (e) => {

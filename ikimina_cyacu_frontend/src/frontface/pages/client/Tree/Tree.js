@@ -11,7 +11,7 @@ import UtilServices from "../../../../service/util.service";
 import { Link } from "react-router-dom";
 import { reverse } from "named-urls";
 import RoutesName from "../../../../app/routes";
-import 'react-phone-input-2/lib/style.css';
+import "react-phone-input-2/lib/style.css";
 
 export const TreeView = () => {
   const print = () => {
@@ -70,8 +70,7 @@ export const TreeView = () => {
         loadMembers();
       })
       .catch((err) => {
-        console.log(err);
-        console.log(firstName);
+        alert(err);
       });
   };
   const exportTo = () => {
@@ -89,9 +88,7 @@ export const TreeView = () => {
               <Row className="justify-content-center">
                 <Col lg={4} md={4} sm={4}>
                   <p className="mt-2 ml-5 mb-0 title text-capitalize text-bold">
-                    <Link to={reverse(RoutesName.home)}>
-                       | Membership Tree
-                    </Link>
+                    <Link to={reverse(RoutesName.home)}>| Membership Tree</Link>
                   </p>
                 </Col>
                 <Col lg={4} md={4} sm={4}>
@@ -131,7 +128,7 @@ export const TreeView = () => {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
@@ -253,7 +250,7 @@ export const TreeView = () => {
               </Row>
               {/* <p className="border-bottom mt-2 mb-0"></p> */}
               <>
-                <div className="mb-4 chart_width" >
+                <div className="mb-4 chart_width">
                   <OrganizationChart
                     ref={orgchart}
                     datasource={rawMembers}

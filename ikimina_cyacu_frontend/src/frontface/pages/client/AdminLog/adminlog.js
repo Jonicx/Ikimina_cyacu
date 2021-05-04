@@ -24,7 +24,6 @@ export const AdminLogView = () => {
         adminId: "Admin",
         timestamp: `${moment(l.timestamp).format("DD/MM/YYYY HH:mm A")}`,
       }));
-      console.log(logs);
       setRawLogs(logs);
     });
   };
