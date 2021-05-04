@@ -29,7 +29,7 @@ class MemberService {
       },
       data: data,
     };
-    return axios(config)
+    return axios(config);
   }
 
   searchMember(queryStr) {
@@ -65,6 +65,25 @@ class MemberService {
       data: data,
     };
 
+    return axios(config);
+  }
+
+  editMember(firstName, lastName, memberId, phoneNumber) {
+    let data = JSON.stringify({
+      firstName: firstName.toUpperCase(),
+      lastName: lastName,
+      memberId: memberId,
+      phoneNumber: phoneNumber,
+    });
+    const config = {
+      method: "put",
+      url: API_URL + "/member/edit",
+      headers: {
+        token: localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
     return axios(config);
   }
 }
