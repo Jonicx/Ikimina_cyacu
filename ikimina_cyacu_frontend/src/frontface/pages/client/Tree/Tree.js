@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Form, Button, Spinner, Modal } from "react-bootstrap";
+import { Row, Col, Form, Button, Spinner, Modal } from "react-bootstrap";
 import printIcon from "../../../../assets/print_32px.png";
 import OrganizationChart from "@dabeng/react-orgchart";
 import UserCard from "./UserCard";
@@ -11,6 +11,7 @@ import UtilServices from "../../../../service/util.service";
 import { Link } from "react-router-dom";
 import { reverse } from "named-urls";
 import RoutesName from "../../../../app/routes";
+import "react-phone-input-2/lib/style.css";
 
 export const TreeView = () => {
   const print = () => {
@@ -44,6 +45,7 @@ export const TreeView = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const handleInputChange = (e) => {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
@@ -68,7 +70,7 @@ export const TreeView = () => {
         loadMembers();
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   };
   const exportTo = () => {
@@ -79,23 +81,21 @@ export const TreeView = () => {
   return (
     <AppLayout>
       <section className="tree-slide no-printme">
-        <Container>
+        <>
           <Row>
-            <Col lg={12} className="WhitePanel_Home ">
+            <Col lg={12} className="">
               <br />
-              <Row class="justify-content-center">
+              <Row className="justify-content-center">
                 <Col lg={4} md={4} sm={4}>
-                  <p className="mt-2 mb-0 title text-capitalize text-bold">
-                    <Link to={reverse(RoutesName.home)}>
-                      &nbsp;&nbsp; | Membership Tree
-                    </Link>
+                  <p className="mt-2 ml-5 mb-0 title text-capitalize text-bold">
+                    <Link to={reverse(RoutesName.home)}>| Membership Tree</Link>
                   </p>
                 </Col>
                 <Col lg={4} md={4} sm={4}>
-                  <Row class="justify-content-center">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Form class="mt-0">
-                      <div class=" row no-gutters mb-1">
+                  <Row className="justify-content-center">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Form className="mt-0">
+                      <div className=" row no-gutters mb-1">
                         <div className="col">
                           <Form.Control
                             type="search"
@@ -106,7 +106,7 @@ export const TreeView = () => {
                             style={{ textAlign: "center", fontSize: "13px" }}
                           />
                         </div>
-                        <div class="col-auto">
+                        <div className="col-auto">
                           <Button
                             className=" mt-0 mb-0 title text-capitalize "
                             type="button"
@@ -128,7 +128,9 @@ export const TreeView = () => {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
                       className=" mt-0 mb-0 title text-capitalize "
                       type="submit"
@@ -246,19 +248,20 @@ export const TreeView = () => {
                   </Modal.Body>
                 </Modal>
               </Row>
-              <p className="border-bottom mt-0"></p>
-              <Row>
-                <Col lg={12} className="mb-3">
+              {/* <p className="border-bottom mt-2 mb-0"></p> */}
+              <>
+                <div className="mb-4 chart_width">
                   <OrganizationChart
                     ref={orgchart}
                     datasource={rawMembers}
                     chartClass="myChart"
                     zoom={true}
                     pan={true}
+                    zoomoutLimit={0.2}
                     NodeTemplate={MemberNode}
                   />
-                </Col>
-              </Row>
+                </div>
+              </>
             </Col>
           </Row>
           {/* Modal Preview */}
@@ -283,7 +286,7 @@ export const TreeView = () => {
           </Modal>
 
           {/* End of Modal Preview */}
-        </Container>
+        </>
       </section>
     </AppLayout>
   );

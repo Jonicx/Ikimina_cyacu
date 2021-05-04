@@ -2,6 +2,8 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './index.css';
 import AppLayout from '../../../layouts/AppLayout';
 import { SlideBar } from '../../../components/SlideBar';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 export const RegistrationView = () => {
 	return (
@@ -40,11 +42,27 @@ export const RegistrationView = () => {
 												/>
 											</Col>
 											<Col lg={12} xs={12} className='mt-2'>
-												<Form.Control
+												{/* <Form.Control
 													type='number'
 													id='tel'
 													name='tel'
 													placeholder='Telephone'
+												/> */}
+												<PhoneInput
+													placeholder='Telephone'
+													id='tel'
+													name='tel'
+													type='number'
+													containerClass="my-container-class"
+													inputClass="my-input-class"
+													containerStyle={{
+														border: "1px",
+														width: "100%"
+													}}
+													inputStyle={{
+														width: "100%"
+
+													}}
 												/>
 											</Col>
 											<Col lg={12} xs={12} className='mt-2'>

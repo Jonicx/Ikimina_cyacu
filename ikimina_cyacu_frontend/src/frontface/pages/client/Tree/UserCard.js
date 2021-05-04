@@ -11,17 +11,17 @@ export default class UserCard extends React.PureComponent {
         <Col xs={9}>
           <ListGroup variant="flush">
             <ListGroup.Item variant="primary">
-              <strong>ID:</strong> {this.props.userData.member.memberId}
+              <strong>ID:</strong>&nbsp; {this.props.userData.member.memberId}
             </ListGroup.Item>
             <ListGroup.Item>
-              <strong>Names:</strong> {this.props.userData.member.firstName}{" "}
+              <strong>Names:</strong>&nbsp; {this.props.userData.member.firstName}&nbsp;
               {this.props.userData.member.lastName}
             </ListGroup.Item>
             <ListGroup.Item>
-              <strong>Telephone:</strong> +25{this.props.userData.member.phoneNumber}
+              <strong>Telephone:</strong> &nbsp;{this.props.userData.member.phoneNumber}
             </ListGroup.Item>
             <ListGroup.Item>
-              <strong>Registered:</strong>
+              <strong>Registered:</strong>&nbsp;
               {`${moment(this.props.userData.member.createdAt).format(
                 " Do MMMM YYYY hh:mm A"
               )}`}
@@ -30,14 +30,14 @@ export default class UserCard extends React.PureComponent {
               <h4>Oriented to:</h4>
               <ListGroup variant="flush">
                 <ListGroup.Item variant="dark">
-                  Orientation ID: {this.props.userData.orientation.memberId}
+                  Orientation ID:&nbsp; {this.props.userData.orientation.memberId}
                 </ListGroup.Item>
                 <ListGroup.Item variant="dark">
-                  Names: {this.props.userData.orientation.firstName}{" "}
+                  Names:&nbsp; {this.props.userData.orientation.firstName}&nbsp;
                   {this.props.userData.orientation.lastName}
                 </ListGroup.Item>
                 <ListGroup.Item variant="dark">
-                  Telephone: +25{this.props.userData.orientation.phoneNumber}
+                  Telephone: &nbsp;{this.props.userData.orientation.phoneNumber}
                 </ListGroup.Item>
               </ListGroup>
             </ListGroup.Item>
