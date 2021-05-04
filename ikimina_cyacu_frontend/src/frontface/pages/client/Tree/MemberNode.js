@@ -51,7 +51,7 @@ function MemberNode({ nodeData }, props) {
   };
   const handleEditSubmit = (e) => {
     setIsLoading(true);
-    const memberId = currentMember.memberId;
+    const memberId = currentMember.member.memberId;
     const { firstName, lastName, phoneNumber } = eachEntry;
     MemberService.editMember(firstName, lastName, memberId, phoneNumber)
       .then((editedMember) => {
@@ -165,7 +165,7 @@ function MemberNode({ nodeData }, props) {
                                 <Form.Control
                                   type="text"
                                   id="fname"
-                                  name="firstname"
+                                  name="firstName"
                                   placeholder={
                                     currentMember.member
                                       ? currentMember.member.firstName
@@ -179,7 +179,7 @@ function MemberNode({ nodeData }, props) {
                                 <Form.Control
                                   type="text"
                                   id="sname"
-                                  name="Surname"
+                                  name="lastName"
                                   placeholder={
                                     currentMember.member
                                       ? currentMember.member.lastName
