@@ -290,9 +290,10 @@ function MemberNode({ nodeData }, props) {
               </Col>
             </>
           </Modal.Body>
+          {/* Modal Footer */}
           <Modal.Footer>
             <Row>
-              <Col >
+              <Col className="">
                 <img src={EditCard} alt="icon" onClick={() => setCount(count + 1)}/>
               </Col>
               <Col>
